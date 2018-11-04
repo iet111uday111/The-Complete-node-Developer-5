@@ -1,0 +1,673 @@
+WEBVTT
+
+00:00.380 --> 00:05.270
+In this video you're going to integrate a single weight into the to do API.
+
+00:05.400 --> 00:10.800
+Now if you don't have that project around or yours isn't working you can go ahead and download the lecture
+
+00:10.800 --> 00:13.420
+downloads for this section which I have right here.
+
+00:13.530 --> 00:18.480
+And if you crack that open there's going to be two folders before and after after contains the final
+
+00:18.480 --> 00:22.530
+code for this video and before it contains the starter project.
+
+00:22.530 --> 00:26.760
+So if you do want to use this you can just drag it wherever you're going to set it up and you can go
+
+00:26.760 --> 00:31.070
+ahead and crack that open in your editor and we'll go through making the changes in here.
+
+00:31.170 --> 00:32.970
+I'm going to do that right now.
+
+00:33.090 --> 00:35.520
+Real quickly switching the editor over to that folder.
+
+00:38.330 --> 00:41.610
+And I am going to be doing the exact same thing with the terminal
+
+00:47.700 --> 00:48.500
+perfect.
+
+00:48.510 --> 00:51.180
+Now I remember the node to do API.
+
+00:51.180 --> 00:54.850
+It also requires the database to be running in order to work as expected.
+
+00:54.930 --> 00:58.770
+So make sure to crack that open in a tab.
+
+00:58.770 --> 01:00.690
+Now you know yourself better than me.
+
+01:00.690 --> 01:04.770
+So if this command didn't work for you previously in the course it's probably not going to work for
+
+01:04.770 --> 01:05.350
+you now.
+
+01:05.360 --> 01:09.990
+So I would recommend going with the exact same command you had used before.
+
+01:10.350 --> 01:10.650
+All right.
+
+01:10.650 --> 01:16.070
+Once the database is up and we have our project set up we can just run NPM test here.
+
+01:16.080 --> 01:22.070
+We can see we are getting an issue Moka not found NPM install is going to fix that.
+
+01:22.080 --> 01:25.590
+So once the dependencies are installed I'm just going to run the test command real quick to make sure
+
+01:25.590 --> 01:30.060
+everything is working and then we're going to start making some changes to the project code.
+
+01:30.060 --> 01:32.660
+Now most of our code lives inside of Cervidae.
+
+01:32.730 --> 01:33.260
+S.
+
+01:33.360 --> 01:35.680
+So this is where we're going to make a lot of the changes.
+
+01:35.910 --> 01:40.620
+If we scroll all the way to the bottom we can get started with some of the easier routes right here
+
+01:40.620 --> 01:41.580
+for example.
+
+01:41.580 --> 01:44.380
+We have our users me token route.
+
+01:44.400 --> 01:50.160
+This allows someone to log out they can delete a given token and they have to be authenticated in order
+
+01:50.160 --> 01:50.980
+to do that.
+
+01:51.150 --> 01:54.570
+What we're going to do is go ahead and make this in a sync function.
+
+01:54.720 --> 01:59.570
+We'll be able to await this promise and do whatever we need to do in the background.
+
+01:59.580 --> 02:04.740
+I am going to run NPM test which should work now that I have my dependencies correctly installed.
+
+02:04.740 --> 02:07.230
+And here we go we are going through the entire test suite.
+
+02:07.290 --> 02:12.240
+Everything is working as expected and in the end of the day all 22 Tests are passing.
+
+02:12.270 --> 02:14.150
+So make sure you have this as well.
+
+02:14.250 --> 02:18.800
+Otherwise the changes we make might not work but we are going to get started right now.
+
+02:18.870 --> 02:20.600
+Tweaking this code.
+
+02:20.730 --> 02:24.210
+As always we're going to change a couple of routes together and then there'll be a few for you to do
+
+02:24.210 --> 02:25.410
+on your own as a challenge.
+
+02:25.410 --> 02:27.140
+We're going to start with this one together.
+
+02:27.150 --> 02:31.800
+This is a simple one so it will allow us to get our feet wet if we want to make this function a sink.
+
+02:31.810 --> 02:32.550
+What do we do.
+
+02:32.640 --> 02:35.570
+We have to tag it as an async function right here.
+
+02:35.580 --> 02:37.250
+I'm going to add that on.
+
+02:37.320 --> 02:42.150
+Now we know that when we market function as a sink we are changing the function instead of returning
+
+02:42.150 --> 02:44.280
+values we're returning a promise.
+
+02:44.280 --> 02:48.330
+So you're probably asking if this is going to affect how Express handles this route.
+
+02:48.390 --> 02:52.010
+And it's not express doesn't use the return value that comes back.
+
+02:52.020 --> 02:58.110
+Currently we are implicitly returning undefined since we don't have the return keyword anywhere by tagging
+
+02:58.110 --> 02:59.050
+it as a sink.
+
+02:59.070 --> 03:03.340
+We are just implicitly returning a promise that resolves undefined.
+
+03:03.360 --> 03:06.170
+This is going to have no meaningful impact on the application.
+
+03:06.180 --> 03:09.290
+But it is it will allow us to restructure this using a weight.
+
+03:09.300 --> 03:14.880
+And that's exactly what we're going to do now in this particular situation we actually don't get any
+
+03:14.910 --> 03:15.750
+value back.
+
+03:15.750 --> 03:22.040
+We are removing a token and we need to do is know whether it succeeded or failed in the past.
+
+03:22.080 --> 03:23.820
+We haven't run into the situation.
+
+03:24.120 --> 03:29.100
+That means there is no need to create a concert like this because there is no value we want back.
+
+03:29.130 --> 03:33.510
+We just want to await remove tokin to complete.
+
+03:33.510 --> 03:34.700
+We don't care what it sends back.
+
+03:34.770 --> 03:37.110
+All we need to know is whether it succeeded or failed.
+
+03:37.230 --> 03:39.260
+And if it succeeded what are we going to do.
+
+03:39.270 --> 03:43.260
+We're just going to respond with the 200 like we have right here.
+
+03:43.260 --> 03:47.640
+The last thing to do is add a case if removed token does throw an error and we know we're just going
+
+03:47.640 --> 03:49.290
+to use a try catch for that.
+
+03:49.290 --> 03:55.520
+So I'll take this code and put it inside of a try block then we can catch any potential errors that
+
+03:55.570 --> 03:56.390
+get thrown in.
+
+03:56.470 --> 04:02.530
+And as we see down below all we do is send back a 400 so we can take that line and move it up above.
+
+04:02.530 --> 04:08.530
+Now we can remove everything we had previously and we now have an async function for the users me token
+
+04:08.710 --> 04:09.360
+route.
+
+04:09.560 --> 04:15.160
+I'm on a save Server database and rerun that test suite to make sure the application is still working
+
+04:15.160 --> 04:16.170
+as expected.
+
+04:16.360 --> 04:21.760
+Now this was a simple one but it let us really figure out how to use a sync with Express really easy
+
+04:21.760 --> 04:22.370
+stuff.
+
+04:22.420 --> 04:26.590
+We're going to move on to this one next which has a bit more complexity here.
+
+04:26.620 --> 04:32.380
+We are using to promise based methods find by credentials and generate auth token.
+
+04:32.380 --> 04:37.090
+So this is a better example of where a single weight really comes in handy.
+
+04:37.210 --> 04:38.360
+All the tests passed.
+
+04:38.380 --> 04:40.570
+So let's go ahead and move on to this guy.
+
+04:40.570 --> 04:41.350
+Step one.
+
+04:41.500 --> 04:43.750
+Tagging it as an async function.
+
+04:43.750 --> 04:44.470
+There we go.
+
+04:44.470 --> 04:47.370
+Step two is adding in our weight calls.
+
+04:47.440 --> 04:51.080
+Now we still want to get a body and we actually don't change that body.
+
+04:51.100 --> 04:52.690
+So this could be a contest.
+
+04:52.790 --> 04:59.430
+I'm going to switch that up then we're going to go ahead and await this promise right here this time
+
+04:59.440 --> 05:00.910
+we are expecting a value back.
+
+05:00.910 --> 05:03.400
+So we will create a variable for that value.
+
+05:03.400 --> 05:10.460
+Konst user equals and then we're just going to paste in the exact same code we had before.
+
+05:10.510 --> 05:16.510
+Now we do need to await this attack the Awake keyword on and that brings us to this part of the function
+
+05:16.780 --> 05:22.120
+here we call user data generate auth token that returns a promise and this is where we continue the
+
+05:22.120 --> 05:24.280
+chain since we're using async await.
+
+05:24.280 --> 05:28.260
+That just means we're going to await this promise appear for here.
+
+05:28.270 --> 05:36.380
+I will create a variable token which matches up with this one and I will await the exact same promise.
+
+05:36.460 --> 05:42.070
+Now that we have both of the promises completed we can move on to this code which sets the X header
+
+05:42.190 --> 05:45.980
+to the token that was generated and it responds with the user object.
+
+05:46.000 --> 05:49.200
+I'm going to go ahead and take this line and move it right here.
+
+05:49.210 --> 05:53.800
+Now the final step is to catch those errors we already have the error handler code.
+
+05:53.930 --> 05:56.640
+All we need to do is actually set up the try catch.
+
+05:56.830 --> 06:03.190
+I'm going to take all of this cut it out move it inside of a try block and tack on that catch block
+
+06:03.550 --> 06:10.000
+then I can add my error handler code and I can remove everything we had previously.
+
+06:10.000 --> 06:12.930
+And in this example we have a much more readable function.
+
+06:13.030 --> 06:19.220
+It's a lot easier to figure out exactly what's going on when things go well and when things go poorly.
+
+06:19.390 --> 06:22.370
+So integrating a sink into your existing applications.
+
+06:22.450 --> 06:27.640
+It's not something you need to do all at once as you create a new app or as you modify an old app.
+
+06:27.700 --> 06:32.740
+You can just slowly start integrating it into the parts of the code that you end up editing adding or
+
+06:32.740 --> 06:33.670
+changing.
+
+06:33.670 --> 06:37.480
+If you have some code that you haven't touched in a while and it's working well you don't necessarily
+
+06:37.480 --> 06:39.360
+need to switch it up with a sync.
+
+06:39.400 --> 06:42.010
+Right now though you absolutely could.
+
+06:42.010 --> 06:46.990
+Now that we've changed this one I'm going to save server dot J S and rerun the test suite one more time
+
+06:47.200 --> 06:50.140
+just to make sure all of the tests are indeed passing.
+
+06:50.140 --> 06:55.150
+If they are we're going to move on to a challenge where you're going to have to do the exact same thing
+
+06:55.210 --> 06:56.930
+for two other routes.
+
+06:56.930 --> 07:01.940
+So up above what we're gonna do is start with the post users route.
+
+07:02.020 --> 07:07.420
+I want you to convert this over to an async await based function.
+
+07:07.420 --> 07:08.970
+Now here we have two promises.
+
+07:08.980 --> 07:10.970
+We have the one that comes back from save.
+
+07:11.200 --> 07:15.640
+And we have the one that comes back from generate auth token you're going to need to go ahead and move
+
+07:15.640 --> 07:17.410
+both of these over to a weight.
+
+07:17.500 --> 07:21.370
+And you're also going to need to make sure to do the correct thing when everything goes well and when
+
+07:21.370 --> 07:23.170
+things go poorly.
+
+07:23.170 --> 07:32.140
+So I'll put a little comment right here to convert this one to a sink a way if we scroll up a little
+
+07:32.140 --> 07:37.320
+more we're going to get to the Delete to do by D1.
+
+07:37.460 --> 07:39.920
+I'd also like you to go ahead and knock this one out.
+
+07:39.920 --> 07:46.510
+Converting this over to a single way to do convert to a sink.
+
+07:46.610 --> 07:47.330
+Oh wait.
+
+07:47.350 --> 07:50.050
+Now yes there are indeed other ones in the code.
+
+07:50.050 --> 07:53.850
+We have quite a few different methods and these could all get converted.
+
+07:53.950 --> 07:58.310
+But for the sake of just keeping this video useful We're going to go with these two.
+
+07:58.350 --> 08:02.380
+That will give you all of the hard ones and you can always go through the other easier ones on your
+
+08:02.410 --> 08:03.080
+own.
+
+08:03.130 --> 08:11.290
+So take some time to fix the delete by id route and down below the creating a user route when you are
+
+08:11.290 --> 08:11.620
+done.
+
+08:11.620 --> 08:15.460
+Go ahead and rerun your test suite and make sure everything is working as expected.
+
+08:15.460 --> 08:19.970
+Pause the video then click play.
+
+08:19.970 --> 08:20.480
+All right.
+
+08:20.480 --> 08:23.420
+Hopefully you're starting to get into a rhythm by now.
+
+08:23.420 --> 08:26.400
+We're going to kick things off by tagging this one as a sink.
+
+08:26.570 --> 08:30.520
+And then we're going to start digging in to the actual code down below.
+
+08:30.530 --> 08:35.570
+Now once again body doesn't change so this could have technically been a contest and same thing with
+
+08:35.570 --> 08:36.360
+bar.
+
+08:36.380 --> 08:38.780
+Change this over to a concert as well.
+
+08:38.780 --> 08:43.120
+That wasn't necessary for the challenge but I'm here so I might as well tweak things a little bit.
+
+08:43.180 --> 08:48.440
+Double-O we have our first promise the one that comes back from calling Save and in this case what do
+
+08:48.440 --> 08:48.850
+we do.
+
+08:48.860 --> 08:50.330
+We don't do anything.
+
+08:50.420 --> 08:52.910
+So there is no need to create a variable.
+
+08:53.000 --> 08:58.260
+We can simply await user datt save before moving on.
+
+08:58.520 --> 08:59.840
+Now inside of there what do we do.
+
+08:59.840 --> 09:02.150
+The next thing we do is we generate a token.
+
+09:02.240 --> 09:03.620
+This time we do get a value back.
+
+09:03.620 --> 09:10.050
+We get the token we just created which means we are going to want to make variable Konst token equals.
+
+09:10.170 --> 09:12.600
+We are going to await what are we going to await.
+
+09:12.620 --> 09:14.840
+We're going to await this guy right here.
+
+09:14.840 --> 09:18.330
+I'm going to take it copy and paste it.
+
+09:18.430 --> 09:22.840
+Now we can move on to the success handler which is just to run a single line.
+
+09:22.870 --> 09:25.670
+We're going to take that line verbatim and put it right there.
+
+09:25.750 --> 09:28.450
+And finally we need to handle those errors.
+
+09:28.450 --> 09:30.370
+We already have the error handling code.
+
+09:30.370 --> 09:32.320
+We just need to set up the try catch block
+
+09:35.510 --> 09:36.870
+I'm going to set up try catch.
+
+09:37.130 --> 09:40.160
+I'm going to paste all of the code I wrote up here in the try block.
+
+09:40.310 --> 09:45.070
+I'm going to paste this error handler code down here inside of the catch block.
+
+09:45.170 --> 09:50.750
+And with that in place we now have our post users route converted to async away so we can go ahead and
+
+09:50.750 --> 09:52.360
+remove that comment.
+
+09:52.490 --> 09:57.350
+So that was the first of two routes and this was the hard Awam and to go ahead and rerun the test suite
+
+09:57.680 --> 10:02.480
+to make sure everything is still working as expected and if it is we'll be able to move on to that final
+
+10:02.480 --> 10:09.910
+route which is the route up above to delete an individual to do by its ID all 22 tests passed.
+
+10:09.950 --> 10:11.800
+So let's continue on right here.
+
+10:11.930 --> 10:17.690
+I'm going to mark this one as a sink and we're going to start the conversion process now down below.
+
+10:17.690 --> 10:19.970
+You can see we just have one promise we await.
+
+10:19.970 --> 10:22.220
+Find one and remove.
+
+10:22.370 --> 10:23.620
+And do we get something back.
+
+10:23.660 --> 10:24.750
+Yes we do.
+
+10:24.770 --> 10:26.730
+We go ahead and we get that to do back.
+
+10:26.780 --> 10:30.510
+That means we can create a cost right here.
+
+10:30.600 --> 10:36.750
+We can call that one to do and we can set it equal to and we're going to await the following.
+
+10:36.810 --> 10:40.140
+I'm going to take this copy and paste it.
+
+10:40.230 --> 10:45.990
+Now this could also be switched over to a concert since ID is not something that we reassign or change
+
+10:46.380 --> 10:47.290
+down below.
+
+10:47.400 --> 10:53.370
+We can now move on to the code that goes inside of the success case Remember find one and remove it
+
+10:53.370 --> 10:57.330
+could potentially be successful without having actually removed anything.
+
+10:57.330 --> 10:59.380
+That's why we check if there was it to do or not.
+
+10:59.580 --> 11:06.570
+So I'm going to take all of this code including the end if cut and paste it right here.
+
+11:06.570 --> 11:07.500
+Now what's left.
+
+11:07.500 --> 11:12.360
+The only thing left is to handle the errors that could have potentially gotten thrown right here.
+
+11:12.360 --> 11:14.870
+So we're going to take this code.
+
+11:14.940 --> 11:21.360
+We're going to move into a try block and we're going to tot's a catch block on the end then we can take
+
+11:21.360 --> 11:25.170
+our air handler which is just one line and move it up above.
+
+11:25.290 --> 11:29.970
+That's going to allow us to remove all of this old code and rerun the test suite hoping and crossing
+
+11:29.970 --> 11:32.300
+our fingers that everything is working as expected.
+
+11:32.400 --> 11:35.950
+Before I do I am going to remove that to do comment.
+
+11:35.970 --> 11:41.760
+Now let's rerun the test suite for the final time and see if the application is still working.
+
+11:41.760 --> 11:45.300
+Right here it looks like everything is working so far and there we go.
+
+11:45.300 --> 11:48.220
+We have 22 test cases passing.
+
+11:48.420 --> 11:54.150
+So at this point I'm hoping that you understand how to use a sink a weight inside of their applications.
+
+11:54.150 --> 11:58.970
+Remember you want to think of this as an enhancement to the promises API.
+
+11:59.070 --> 12:03.440
+So when you're working with promises and you find yourself getting into some complex changing situations
+
+12:03.450 --> 12:07.690
+just take a step back and think about how you could restructure that with a sink.
+
+12:07.830 --> 12:12.610
+Once again don't get yourself all worried about changing all of your code over right away.
+
+12:12.630 --> 12:14.130
+Coode changes all the time.
+
+12:14.130 --> 12:15.210
+New features come up.
+
+12:15.300 --> 12:20.580
+Yes it's a good idea to use them but there's no need to waste 10 hours refactoring a project that's
+
+12:20.580 --> 12:22.240
+working perfectly fine.
+
+12:22.260 --> 12:24.630
+I recommend refactoring as you go.
+
+12:24.720 --> 12:29.790
+So as you edit an old project as you're making changes to various functions and adding new features
+
+12:29.790 --> 12:33.990
+just switch things over to using a sync away when you're creating a new project.
+
+12:33.990 --> 12:37.260
+Obviously it's a pretty good idea to use async away from the beginning.
+
+12:37.260 --> 12:40.250
+Hopefully you are seeing the advantages that it brings.
+
+12:40.290 --> 12:46.110
+It allows us to write code that is indeed a synchronous in a way that looks synchronous that allows
+
+12:46.110 --> 12:51.010
+us to just read through the lines one at a time and figure out exactly what's going on.
+
+12:51.060 --> 12:56.370
+All right that is it for this new section on async Oh wait if you're looking for a stretch challenge
+
+12:56.610 --> 13:03.960
+I recommend trying to convert every single usage of promises in this application over to async away.
+
+13:04.020 --> 13:09.780
+That includes things in server server Dom test and the other files you're going to use the exact same
+
+13:09.780 --> 13:14.820
+technique we used here and the same technique we used over inside of our other examples.
+
+13:14.820 --> 13:20.430
+The currency converter and the app promises example feel free to keep this code around and use it as
+
+13:20.430 --> 13:21.140
+a reference.
+
+13:21.150 --> 13:25.620
+A new syntax like this one can be a little tricky to remember but once you get a little bit of practice
+
+13:25.890 --> 13:27.930
+it'll come second nature.
+
+13:27.960 --> 13:29.310
+All right that's it for now.
+
+13:29.310 --> 13:30.400
+I'll see you next time.

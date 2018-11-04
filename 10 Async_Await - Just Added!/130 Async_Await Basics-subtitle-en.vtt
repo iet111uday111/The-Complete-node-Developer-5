@@ -1,0 +1,565 @@
+WEBVTT
+
+00:00.840 --> 00:01.590
+Welcome back.
+
+00:01.590 --> 00:07.010
+In this video you're finally going to get to use the new async await functionality.
+
+00:07.020 --> 00:11.500
+We're going to create an alternative version of this get status function and we're going to call it
+
+00:11.550 --> 00:15.520
+get status alt so we can go ahead and actually define that right here.
+
+00:15.540 --> 00:18.090
+Cost get status.
+
+00:18.210 --> 00:18.900
+Alt.
+
+00:18.960 --> 00:20.520
+Now it's still going to be a function.
+
+00:20.550 --> 00:25.170
+So we're going to start off by creating an arrow function and we're still going to take in an argument
+
+00:25.290 --> 00:26.590
+so we'll define that right here.
+
+00:26.610 --> 00:32.130
+User ID now though we're going to switch things up instead of working through the old example.
+
+00:32.130 --> 00:35.300
+We're going to use the new async await functionality to explore this.
+
+00:35.310 --> 00:38.450
+Let's temporarily comment out this code right here.
+
+00:38.580 --> 00:43.150
+We'll be recreating it with a call to get status alt as opposed to a call to get status.
+
+00:43.170 --> 00:48.840
+But I do want to leave the old code in place so we can directly compare and contrast the differences.
+
+00:48.870 --> 00:54.090
+The new async await functionality is going to allow us to write this in a way that looks like synchronous
+
+00:54.090 --> 01:00.750
+code which means that we'll be able to avoid things like then callbacks promise chaining and work arounds
+
+01:00.930 --> 01:06.720
+like creating a user variable in this scope temporarily setting it here just to use it down below with
+
+01:06.720 --> 01:07.480
+async await.
+
+01:07.500 --> 01:09.490
+We're going be able to avoid all of that stuff.
+
+01:09.600 --> 01:15.150
+Creating a function that's just a whole lot easier to read alter work with and test.
+
+01:15.540 --> 01:19.750
+Now get status Allt is going to start off in a way that is super boring.
+
+01:19.770 --> 01:21.270
+We're going to return the string.
+
+01:21.270 --> 01:29.370
+Mike this is javascript 101 stuff you would expect Mike to come back if I Konsole logged Whatever comes
+
+01:29.370 --> 01:33.000
+back from get status alt nothing earth shattering here.
+
+01:33.180 --> 01:37.380
+Let's just go ahead and work through this so we're going to save the file gnomon is going to restart
+
+01:37.440 --> 01:38.120
+hopefully soon.
+
+01:38.130 --> 01:42.350
+And then we get we have Mike printing to the screen that's exactly what I would expect.
+
+01:42.360 --> 01:47.690
+Now with a wait we actually mark our functions as special functions.
+
+01:47.760 --> 01:49.140
+So I have a few functions here.
+
+01:49.170 --> 01:53.430
+We're going to be marking this one as a special async function.
+
+01:53.610 --> 01:57.800
+So in the future async away there are two words async and a weight.
+
+01:57.870 --> 01:58.890
+These aren't just words.
+
+01:58.890 --> 02:03.680
+These are actual keywords that were going to be typing out exactly as you see them here.
+
+02:03.870 --> 02:09.700
+The first one a wait will eventually get used inside of our async functions.
+
+02:09.840 --> 02:14.650
+But before we can ever use a wait we have to mark that function as a sig.
+
+02:14.760 --> 02:15.960
+So we're going to do that first.
+
+02:15.990 --> 02:16.940
+We're going to explore it.
+
+02:17.040 --> 02:19.300
+Then we'll move on to a wait right here.
+
+02:19.320 --> 02:25.440
+All we're going to do is add a sink in front of our arguments list with a space.
+
+02:25.440 --> 02:32.040
+Now this is actually going to change how the code below works to explore that all we're going to do
+
+02:32.040 --> 02:37.320
+is save the file and see what we get instead of getting the string Mike back you can see we're now getting
+
+02:37.320 --> 02:38.390
+a promise back.
+
+02:38.400 --> 02:41.790
+We're getting a promise back that resolves the string.
+
+02:41.790 --> 02:47.040
+MIKE So this brings us to the first big difference between regular functions and async functions regular
+
+02:47.040 --> 02:51.260
+functions return strings and strings come back async functions.
+
+02:51.270 --> 02:57.680
+They always always return promises if you return something from an async function.
+
+02:57.840 --> 03:01.890
+It's actually returning a promise and it's resolving this value.
+
+03:01.920 --> 03:05.510
+So this function is equivalent to what I'm about to write.
+
+03:05.550 --> 03:06.900
+You don't have to write this out.
+
+03:06.900 --> 03:08.750
+I'm going to delete it in just a second.
+
+03:08.760 --> 03:17.520
+It is equivalent to creating a function that returns a new promise where that new promise gets resolved
+
+03:17.550 --> 03:23.110
+and reject and then it calls resolve with Mike.
+
+03:23.210 --> 03:25.610
+These two are identical.
+
+03:25.610 --> 03:27.320
+They have the exact same functionality.
+
+03:27.320 --> 03:28.150
+We create a new promise.
+
+03:28.160 --> 03:34.000
+We resolve Mike or we use an async function that simply returns something that is a lesson one.
+
+03:34.070 --> 03:39.380
+When you have an async function whenever you return it is actually just going to get resolved which
+
+03:39.380 --> 03:42.290
+means that we can switch up this usage right here.
+
+03:42.560 --> 03:46.030
+I'm going to call get status alt this time.
+
+03:46.030 --> 03:52.130
+We're getting a promise back and we know that so we can just use then what are we going to get back.
+
+03:52.170 --> 03:55.800
+We're going to get back the return value as our resolved value.
+
+03:55.890 --> 04:00.490
+If I returned a string I'd get a string back here a number I'd get a number of bullion an object a function
+
+04:00.750 --> 04:07.680
+whatever you explicitly returned from this function is going to be available as if it was resolved which
+
+04:07.680 --> 04:14.400
+means that I can create a name variable like a log at counsel dot log in name.
+
+04:14.410 --> 04:16.990
+Now what are we getting it back inside of Nordman.
+
+04:17.050 --> 04:18.900
+We're just going to get back Mike once again.
+
+04:18.910 --> 04:25.330
+The regular plain old string because we've added on a piece of promise based chaining.
+
+04:25.330 --> 04:29.830
+We then get the name and we print it out and here Mike Prince once again.
+
+04:29.830 --> 04:35.170
+So if returning a value is equivalent to resolving how do we reject.
+
+04:35.170 --> 04:39.670
+If I wanted to reject an error like this is an error.
+
+04:39.700 --> 04:42.600
+How do I go about doing that with the new async feature.
+
+04:42.760 --> 04:49.660
+All we do is we throw a new error using standard javascript techniques throw a new error with a message.
+
+04:49.660 --> 04:52.290
+This is an error.
+
+04:52.330 --> 04:55.680
+This is equivalent to what we have up above.
+
+04:55.780 --> 05:01.690
+Using techniques you already know about when you throw a new error from an async function it is exactly
+
+05:01.690 --> 05:04.490
+the same as rejecting some value.
+
+05:04.630 --> 05:09.220
+So in this case we go ahead and use that error by adding one catch like we would if it was a regular
+
+05:09.220 --> 05:10.520
+old promise.
+
+05:10.750 --> 05:16.850
+We're going to get the error back and I'll use council dot log to print it to the screen if it occurs
+
+05:17.090 --> 05:20.430
+and it's always going to occur because I throw it right here on line.
+
+05:20.450 --> 05:24.100
+What if I save the file gnomon restarts and we get error.
+
+05:24.110 --> 05:26.730
+This is an error printing to the screen.
+
+05:26.750 --> 05:30.350
+So those are the first two important things you need to know about async functions.
+
+05:30.350 --> 05:32.420
+Before we go any further and use wait.
+
+05:32.450 --> 05:37.940
+Returning something is equivalent to resolving end throwing an error is equivalent to rejecting.
+
+05:38.060 --> 05:40.590
+We always get a promise back.
+
+05:40.820 --> 05:46.610
+So at this point we have only used half of the feature reviews the async part which alone is not particularly
+
+05:46.610 --> 05:47.420
+useful.
+
+05:47.420 --> 05:50.090
+It gets really useful when we combine it with a weight.
+
+05:50.210 --> 05:52.410
+So let's go ahead and start taking a look at that.
+
+05:52.460 --> 05:59.390
+That's going to allow us to introduce the other functions back into play get grades and get user right
+
+05:59.390 --> 05:59.960
+year.
+
+05:59.990 --> 06:03.800
+We're just going to go ahead and use a way then we'll talk about exactly what's happening.
+
+06:03.800 --> 06:04.930
+So for the moment.
+
+06:04.970 --> 06:08.060
+Bear with me and just type out this line.
+
+06:08.060 --> 06:13.240
+Konst user equals and we're going to set it equal to.
+
+06:13.370 --> 06:16.740
+We're going to use the Awake keyword We'll talk about this in just a second.
+
+06:16.760 --> 06:18.260
+We're going to call get user.
+
+06:18.520 --> 06:20.750
+And we're going to pass in the User ID.
+
+06:20.870 --> 06:22.400
+So let's start breaking this line down.
+
+06:22.450 --> 06:23.730
+This We've done this before.
+
+06:23.780 --> 06:26.860
+We're calling get user with a user id it returns and promise.
+
+06:26.870 --> 06:28.900
+We have the exact same code right here.
+
+06:28.910 --> 06:30.750
+We've also done this about a billion times.
+
+06:30.770 --> 06:33.420
+We're creating a new variable user and it's a constant.
+
+06:33.440 --> 06:34.860
+It's this part that's new.
+
+06:35.120 --> 06:36.230
+So we await key word.
+
+06:36.230 --> 06:40.370
+As I mentioned earlier it has to be used in an async function and we're meeting that criteria.
+
+06:40.370 --> 06:44.340
+We have an async function which means we can use a weight inside of it.
+
+06:44.420 --> 06:46.870
+We use a wait just before a promise.
+
+06:46.870 --> 06:48.650
+So here we get a promise back.
+
+06:48.650 --> 06:56.270
+So we're waiting for that promise to either resolve or reject if that promise resolves the result of
+
+06:56.270 --> 07:01.760
+this expression is going to be the resolved value which means that resolves value will get stored in
+
+07:01.760 --> 07:03.220
+the User variable.
+
+07:03.350 --> 07:09.110
+If the promise rejects it is going to be equivalent to throwing an error which means no user variable
+
+07:09.110 --> 07:14.720
+will ever be created the function will stop executing and we'll get that error down below inside of
+
+07:14.720 --> 07:15.430
+catch.
+
+07:15.590 --> 07:21.200
+Let's go ahead and actually play around with this what I'm going to do is pass an ID and to get status
+
+07:21.240 --> 07:21.750
+all.
+
+07:21.890 --> 07:29.570
+Let's go ahead and use Jessica and we're going to do is console log user to the screen.
+
+07:29.570 --> 07:35.670
+We want to see what user equals now gnomon is going to restart in the background in my gnomon got cleared
+
+07:35.670 --> 07:36.230
+before.
+
+07:36.350 --> 07:42.030
+Right here we have our object with an ID of two with the name of Jessica and the school ID of 9 9 9.
+
+07:42.050 --> 07:48.650
+So without a wait we would be getting a promise back here with a way we're able to actually get that
+
+07:48.650 --> 07:53.630
+value back which is equivalent to what we did up above it's equivalent to this stuff where we got access
+
+07:53.630 --> 07:55.960
+to the user and we did something with it.
+
+07:56.060 --> 08:00.560
+But using async await we're able to do this in a way that looks very very synchronous.
+
+08:00.560 --> 08:04.760
+Now we can apply this exact same technique to getting the grades down below.
+
+08:05.300 --> 08:07.030
+We're going to make a contest called grades.
+
+08:07.040 --> 08:08.560
+We want those grades back.
+
+08:08.600 --> 08:13.430
+What we don't want to do is create stupid temporary variables and complex chaining and nesting.
+
+08:13.430 --> 08:15.590
+We just want to get the grades.
+
+08:15.590 --> 08:21.340
+So we're going to await the following promise to either resolve or reject the one that comes back from
+
+08:21.340 --> 08:26.260
+get grades when we pass in a valid school ID user dot school I.
+
+08:26.290 --> 08:26.830
+D.
+
+08:27.100 --> 08:32.470
+This is going to return the grades right for that user will be able to dump them to the screen.
+
+08:32.470 --> 08:37.140
+So right here we are getting the object and the grades for Jessica.
+
+08:37.150 --> 08:38.380
+She just has one grade.
+
+08:38.470 --> 08:41.070
+So we have an array with a single object inside of it.
+
+08:41.080 --> 08:42.420
+We're not getting back a promise.
+
+08:42.490 --> 08:44.640
+We are getting back a regular old array.
+
+08:44.770 --> 08:46.390
+The same thing is true for Andrew.
+
+08:46.390 --> 08:51.770
+He's going to add those two grades they're all going to come back and if I switch this up to an ID that's
+
+08:51.770 --> 08:53.320
+not valid we're going to get our error.
+
+08:53.360 --> 09:01.450
+Unable to find user with an ID of 2:59 that is because this rejects which is equivalent to throwing
+
+09:01.450 --> 09:02.100
+an error.
+
+09:02.230 --> 09:08.160
+And we saw that when we throw an error from an async function with access to it via a catch.
+
+09:08.350 --> 09:13.630
+So at this point we have our user we have our grades and we're ready to move on to the final step which
+
+09:13.630 --> 09:15.340
+is the actual important stuff.
+
+09:15.370 --> 09:20.410
+So far we're just getting data and I took a few lines of code and it required us to nest things at this
+
+09:20.410 --> 09:21.020
+point.
+
+09:21.160 --> 09:23.680
+We can take this code exactly as it sits.
+
+09:23.680 --> 09:28.730
+This code relies on a user variable which we have and a grade's variable which we also have.
+
+09:28.810 --> 09:31.000
+So we can take it and copy it right here.
+
+09:32.440 --> 09:33.240
+Perfect.
+
+09:33.250 --> 09:39.220
+Now we set up our average variable we calculate the average if there are grades and we return our status.
+
+09:39.220 --> 09:43.640
+At this point we can use the status here and we can print it here.
+
+09:43.840 --> 09:50.980
+And let's change it back to one or two some ID that does exist this time when javascript runs through
+
+09:51.010 --> 09:55.300
+get status alt it is actually going to return the correct status.
+
+09:55.330 --> 10:02.650
+Andrew has in 83 in the class and Jessica has a 100 in the class and we were able to do all of this
+
+10:02.650 --> 10:10.640
+without a single callback no chaining no nesting just regular old code that looks like synchronous code.
+
+10:10.720 --> 10:12.020
+We create a user variable.
+
+10:12.040 --> 10:15.310
+Nothing else runs until this process resolves or rejects.
+
+10:15.310 --> 10:17.050
+We then create the grades variable.
+
+10:17.050 --> 10:22.490
+Nothing else runs until this promise resolves or rejects and we're actually using user right here.
+
+10:22.570 --> 10:24.750
+What you don't have until the previous line completes.
+
+10:24.790 --> 10:26.760
+But that's fine because we're in a sync.
+
+10:26.830 --> 10:31.360
+Oh wait this line than this line then the rest of the code which is all normal code.
+
+10:31.470 --> 10:32.560
+So we go through all of the steps.
+
+10:32.560 --> 10:33.850
+We get our status back.
+
+10:33.880 --> 10:38.350
+We were able to take this code and get it down into this code.
+
+10:38.350 --> 10:43.480
+Now I don't know about you but this is way more readable maintainable and understandable than what we
+
+10:43.480 --> 10:44.650
+have up above.
+
+10:44.650 --> 10:47.010
+Using async away we're going to able to do just that.
+
+10:47.050 --> 10:51.670
+We're going to be able to write better more concise promise based code.
+
+10:51.670 --> 10:54.880
+Now you'll notice that I'm not using a wait on the functions up above.
+
+10:54.880 --> 10:58.660
+There is no need to because we don't need a sync inside of them.
+
+10:58.870 --> 11:04.930
+And one more important thing to note there is no top level of weight so I can't do something like this.
+
+11:08.920 --> 11:16.010
+Right here Konst status equals a weight get status Allt.
+
+11:16.360 --> 11:17.650
+This is not valid.
+
+11:17.650 --> 11:22.720
+There is no top level of weight you have to use a weight inside of an async function.
+
+11:22.720 --> 11:27.280
+So in our case all that means is that we do use a little chaining at the end but when we are working
+
+11:27.310 --> 11:31.760
+with complex chains we are able to use async await to get the job done.
+
+11:32.020 --> 11:33.160
+So that is it for this video.
+
+11:33.160 --> 11:37.150
+At this point I don't expect you to be able to use async away on your own.
+
+11:37.150 --> 11:40.470
+We're going to run through another example using real API eyes.
+
+11:40.480 --> 11:42.730
+That's going to give us a little more real world experience.
+
+11:42.730 --> 11:45.320
+I'm excited to get to see it in the next one.

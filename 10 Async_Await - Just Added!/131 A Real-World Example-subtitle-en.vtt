@@ -1,0 +1,901 @@
+WEBVTT
+
+00:00.510 --> 00:04.620
+Welcome back in this one we're going to move on from our contrived example and we're going to look at
+
+00:04.620 --> 00:08.350
+an example using two real HTP API.
+
+00:08.370 --> 00:13.160
+Before we do it's important to note that aero functions aren't the only functions that support async.
+
+00:13.170 --> 00:15.200
+I just happened to use an arrow function.
+
+00:15.240 --> 00:18.180
+I could also use an S-5 function with the function keyword.
+
+00:18.180 --> 00:19.530
+This works as well.
+
+00:19.530 --> 00:24.690
+I can save the file and I'm still going to get Jessica has it 100 percent printing down below.
+
+00:24.810 --> 00:30.180
+I can also async and ESX object method but I am going to stick with an arrow function here.
+
+00:30.180 --> 00:30.990
+Perfect.
+
+00:30.990 --> 00:34.680
+Now we're going to leave this file in the dust then we're going to move on to a brand new file for our
+
+00:34.680 --> 00:36.110
+real world example.
+
+00:36.120 --> 00:39.180
+This one is going to be called currency convert Scott J.
+
+00:39.190 --> 00:41.550
+S. as you can probably guess by the name.
+
+00:41.550 --> 00:44.250
+We're going to create a currency converter.
+
+00:44.250 --> 00:49.050
+So essentially this is just a function that takes three arguments we're going to start off with the
+
+00:49.180 --> 00:51.880
+currency code for the currency we're starting with.
+
+00:51.990 --> 00:54.040
+In this case let's say I have U.S. dollars.
+
+00:54.210 --> 00:56.570
+Then it's the currency code we're trying to convert to.
+
+00:56.660 --> 01:00.810
+Let's say I'm going up to Canada and I want to see how much my money is worth and the amount we want
+
+01:00.810 --> 01:02.190
+to convert by.
+
+01:02.670 --> 01:08.910
+So this is essentially asking for the Canadian equivalent of 23 US dollars and we're going to able to
+
+01:08.910 --> 01:13.560
+use any code we want in any value we want now to actually get all that information.
+
+01:13.560 --> 01:18.030
+We are going to be using two API and then the end of the day we're going to have something like this
+
+01:18.330 --> 01:19.190
+right here.
+
+01:19.770 --> 01:30.720
+We would essentially be saying 23 U.S. dollars is worth let's just go ahead and say twenty eight see
+
+01:30.750 --> 01:31.670
+a DS.
+
+01:31.720 --> 01:32.830
+Not sure if that's right.
+
+01:34.030 --> 01:44.160
+You can spend these in the following countries and then we'll go ahead and list out all of the countries
+
+01:44.310 --> 01:47.330
+that actually accept the Canadian dollar.
+
+01:47.370 --> 01:50.540
+Now to actually get all this information we will be using this to API.
+
+01:50.670 --> 01:55.770
+And I do want to explore those over inside of Crome real quick that will actually install X-post make
+
+01:55.770 --> 02:00.000
+their requests and integrate all of that into the currency converter.
+
+02:00.000 --> 02:04.400
+The first one we're going to be using is at fixer dot.
+
+02:04.440 --> 02:10.560
+Oh this one is going to give us current currency numbers so we're going to able to get those exchange
+
+02:10.560 --> 02:12.660
+rates if we go over to the Web site.
+
+02:12.660 --> 02:17.580
+They have a great usage page you can click these you are Elle's that's going to show you the exact data
+
+02:17.580 --> 02:18.620
+that would come back.
+
+02:18.690 --> 02:26.050
+Had you made an HTP request this API and the other one were going to be using the do not require authentication.
+
+02:26.130 --> 02:28.420
+So we're going to able to integrate them without too much trouble.
+
+02:28.560 --> 02:31.350
+Right here we see the base currency is the euro.
+
+02:31.380 --> 02:35.730
+Whoops closed on me and we can see what a euro is worth and other currencies.
+
+02:35.730 --> 02:44.800
+So one euro is currently worth one point to 1 9 US dollars or 1.5 1 Five Canadian dollars.
+
+02:44.820 --> 02:48.840
+This is the first point that we're going to be using and we're actually going to be using an alternative
+
+02:48.840 --> 02:50.110
+down below here.
+
+02:50.130 --> 02:56.360
+We can specify the base query parameter that is going to start us out at the currency of our choice.
+
+02:56.370 --> 03:00.380
+This is the currency that we're converting from and then we'll get the exchange rate.
+
+03:00.390 --> 03:06.510
+So if I want to convert U.S. IDs to Canadian dollars I would get the base USD conversion chart.
+
+03:06.690 --> 03:11.790
+I would find this number and I would just multiply 23 by this number or whatever value I was trying
+
+03:11.790 --> 03:12.950
+to convert.
+
+03:12.960 --> 03:14.410
+So this is API number one.
+
+03:14.420 --> 03:19.550
+Let's go ahead and grab this you I'll open it up in the browser and we're going to leave that up.
+
+03:19.560 --> 03:21.650
+We'll be coming back to it in just a moment.
+
+03:21.720 --> 03:27.810
+The other API that we're going to be using you can find at rest countries dot EU.
+
+03:27.810 --> 03:31.330
+This one contains some useful information about countries.
+
+03:31.380 --> 03:32.600
+If you go to the all.
+
+03:32.600 --> 03:39.830
+Example we can get this you are el we can crack open in the browser and we can see the extensive list
+
+03:39.830 --> 03:43.840
+of countries and Country data that the API returns.
+
+03:43.940 --> 03:46.690
+Starting off with Afghanistan various things about it.
+
+03:46.690 --> 03:52.990
+Top level domains alternative spellings regions lat and long population a lot of really nice information.
+
+03:53.000 --> 03:55.710
+It also includes those currency codes.
+
+03:55.850 --> 03:58.280
+So we're actually going to be using a different end point.
+
+03:58.360 --> 04:02.180
+They support the down below currency endpoint.
+
+04:02.210 --> 04:07.010
+This lets you find countries that use a specific currency.
+
+04:07.010 --> 04:09.170
+So let's take this you are l and cracked open in the browser.
+
+04:09.170 --> 04:10.520
+Here we're using S.O.P.
+
+04:10.610 --> 04:12.700
+Let's go ahead and swap that out for you.
+
+04:12.700 --> 04:13.620
+S d.
+
+04:13.640 --> 04:16.510
+Now there are multiple countries that use the United States dollar.
+
+04:16.530 --> 04:22.220
+Here we have American Samoa down below if we scroll way way way down the list we're going to get other
+
+04:22.220 --> 04:22.830
+things.
+
+04:22.910 --> 04:26.180
+Here we got Zimbabwe for example up above.
+
+04:26.180 --> 04:27.640
+We have the United States of America.
+
+04:27.650 --> 04:28.880
+That's an obvious one.
+
+04:28.880 --> 04:30.320
+Turks and Caicos Islands.
+
+04:30.350 --> 04:33.400
+So there are quite a few different places that use the U.S. dollar.
+
+04:33.750 --> 04:38.140
+If we swap it out for SEE kind Canada only one they're perfectly fine.
+
+04:38.180 --> 04:42.980
+So using these two end points we're going to be able to convert the currency and figure out which countries
+
+04:43.040 --> 04:45.310
+support that currency.
+
+04:45.350 --> 04:47.290
+We're going to wire all of this up together.
+
+04:47.390 --> 04:53.050
+Then I'm going to set you out on your own to actually use a sink a wait to get that information.
+
+04:53.060 --> 04:58.430
+Let's go ahead and kick things off over inside of the terminal by shutting things down clearing the
+
+04:58.430 --> 05:01.640
+output and installing the necessary dependencies.
+
+05:01.670 --> 05:03.630
+I'm going to run NPM in it.
+
+05:03.710 --> 05:11.090
+We can just generate a quick package that Jason file using the defaults and now use NPM install X-posts
+
+05:11.390 --> 05:18.140
+the current version of Access is 0.16 point 1 and we'll toss on the Save flag that's going to be sure
+
+05:18.140 --> 05:19.550
+to say that as a dependency.
+
+05:19.670 --> 05:20.490
+And there we go.
+
+05:20.540 --> 05:23.500
+Everything is working as expected.
+
+05:23.510 --> 05:28.450
+Now we can clear this output and we can actually take advantage of access inside of our application.
+
+05:28.490 --> 05:33.740
+So let's kick things off with the first one we're going to go ahead and set up a function that makes
+
+05:33.740 --> 05:40.610
+the call to fix her and gets the exchange rate to do that over inside of Adam.
+
+05:40.800 --> 05:43.750
+We're going to kick things off by creating a contest.
+
+05:43.770 --> 05:50.910
+X is going to require access and then we're going to make a concert for one of our two functions.
+
+05:50.910 --> 05:59.480
+This is for the first point get exchange rate now get exchange rate is going to take two pieces of information
+
+05:59.840 --> 06:04.310
+the from currency code and the two currency code.
+
+06:04.310 --> 06:10.010
+So if I was going to do this example out of USD here and see a D here this is going to be a function
+
+06:10.270 --> 06:13.250
+and all we're going to do is use axes.
+
+06:13.370 --> 06:15.720
+That's X-ers dot get.
+
+06:16.160 --> 06:20.210
+And we're going to pass in and that you are l and I just copied it from the browser.
+
+06:20.210 --> 06:23.810
+Now we want to set the base equal to whatever currency we're coming from.
+
+06:24.020 --> 06:29.840
+So I can go ahead and use that template string swapping out the static base value for a dynamic one
+
+06:30.200 --> 06:36.590
+accessing from then we're going to use that real quick and we're going to use that here to just manipulate
+
+06:36.710 --> 06:37.890
+the value.
+
+06:37.910 --> 06:42.470
+So this is going to return the promise from X-post with a bunch of information about the h t t p request
+
+06:42.850 --> 06:46.370
+the color of get exchange rate does not care about that.
+
+06:46.430 --> 06:49.320
+They shouldn't even know that an HTP request was made.
+
+06:49.340 --> 06:51.380
+All they need back is a number.
+
+06:51.410 --> 06:54.270
+So that is exactly what we're going to give them right here.
+
+06:54.290 --> 06:56.330
+We're going to have access to response
+
+06:59.710 --> 07:02.560
+and on the response we're going to able to get that currency code.
+
+07:02.620 --> 07:06.340
+So we're going to return response dot data.
+
+07:06.430 --> 07:08.680
+This gets us into the adjacent object.
+
+07:08.680 --> 07:14.330
+Now in here we have a rates object which is key value pairs where the key is the currency.
+
+07:14.350 --> 07:21.190
+So we do want to access rates and you want to get the rate for whatever the two variable is.
+
+07:21.190 --> 07:27.130
+So in this case we would have us these two Canadian dollars we would call this you are l with USD and
+
+07:27.130 --> 07:31.490
+we would get this value back one point 3 5 0 8.
+
+07:31.510 --> 07:35.740
+That is the exact value that we're going to return right here.
+
+07:35.740 --> 07:41.640
+Let's go ahead and test this out down below get exchange rate.
+
+07:41.840 --> 07:45.990
+I'm going to pass in U.S. IDs to Canadian dollars.
+
+07:47.420 --> 07:51.350
+Then we'll get our rate back and we can live it out.
+
+07:51.350 --> 07:54.070
+Cancel that log rate.
+
+07:54.110 --> 07:58.730
+I'm going to go ahead and save this in the background inside of the terminal.
+
+07:58.760 --> 08:00.940
+We can start up gnomon once again.
+
+08:01.150 --> 08:02.600
+Gnomon.
+
+08:02.690 --> 08:07.540
+We're going to run the currency convert file right here you can see cannot read propertied that of undefine.
+
+08:07.550 --> 08:08.240
+That's my fault.
+
+08:08.240 --> 08:09.710
+I need to return this right here.
+
+08:09.710 --> 08:11.300
+Perfect.
+
+08:11.300 --> 08:14.270
+Now I can go back and not could film that but that was just a quick typo.
+
+08:14.270 --> 08:18.350
+So essentially we had a promise but we weren't returning it which means we were not able to chain on
+
+08:18.350 --> 08:20.030
+down below by returning the promise.
+
+08:20.030 --> 08:24.680
+We are able to change things on getting the rate and printing it right here.
+
+08:24.680 --> 08:30.770
+We get that value 1 point 3 5 0 8 is the current currency exchange rate.
+
+08:30.770 --> 08:36.800
+I could put it you are in here and I could figure out what the euro exchange rate is zero point 8 9
+
+08:36.860 --> 08:38.450
+1 3 5.
+
+08:38.450 --> 08:39.150
+So there we go.
+
+08:39.170 --> 08:41.660
+We got our first one all knocked out.
+
+08:41.660 --> 08:48.570
+Now the other one that were going to create real quick is going to be get countries get countries is
+
+08:48.570 --> 08:59.110
+going to get a list of countries just their names and we're going to get it by currency code.
+
+08:59.300 --> 09:05.840
+This one just like the one up above is also going to return a promise from X CEOs dot get and then you
+
+09:05.840 --> 09:06.170
+are out.
+
+09:06.170 --> 09:12.200
+We want to get lives over in the browser so right here we have our new Arel we have the spot where we're
+
+09:12.200 --> 09:15.080
+going to dump our currency code so we can knock that out.
+
+09:15.080 --> 09:21.000
+It's going to be a template Szeryng and we're going to get rid of CJD and we are going to inject whatever
+
+09:21.020 --> 09:26.890
+the currency code argument is now at this point once again.
+
+09:26.990 --> 09:31.310
+Yes we do want to do a little manipulation to the data so I could go ahead and use then
+
+09:35.490 --> 09:38.580
+and right here I can go ahead and access the response
+
+09:41.270 --> 09:42.640
+what I want to do with the response.
+
+09:42.700 --> 09:44.030
+I just want to loop over it.
+
+09:44.030 --> 09:49.870
+I want to figure out all the countries that support my currency and I want to return an array.
+
+09:50.000 --> 09:52.250
+Now you know that we're going to get all those countries back right.
+
+09:52.250 --> 09:57.330
+So for CJD we have an array the single object inside of it for you SD.
+
+09:57.830 --> 10:00.380
+We have an array with multiple objects inside of it.
+
+10:00.440 --> 10:04.510
+So we're going to take this array of objects and we're going to convert it to an array of string.
+
+10:04.520 --> 10:08.740
+So we would start off with America Samoa right here to do that.
+
+10:08.750 --> 10:13.080
+We're just going to use map back inside of atom.
+
+10:13.120 --> 10:19.510
+We can go ahead and knock this out real quick by returning response data which is an array which means
+
+10:19.510 --> 10:21.720
+it has access to that map method.
+
+10:21.920 --> 10:28.970
+We're then going to use map each individual item is going to be a country.
+
+10:29.060 --> 10:35.120
+Each country has a name property so we can return country dotted name giving us an array of country
+
+10:35.120 --> 10:37.020
+names that support the currency.
+
+10:37.070 --> 10:42.680
+In this case we can simplify that by implicitly returning country dot name.
+
+10:42.680 --> 10:45.200
+Now go ahead and test that out right here.
+
+10:45.650 --> 10:50.700
+Get countries we we're going to get countries back
+
+10:53.730 --> 10:59.100
+and we're going to dump countries to the screen and we only provide a single argument.
+
+10:59.140 --> 11:04.010
+So if we save this and check things out over in the terminal we should see exactly what comes back here.
+
+11:04.120 --> 11:09.130
+We have a list of all of the countries that we can use that currency in this case the U.S. dollar.
+
+11:09.130 --> 11:13.010
+We could go over to EQR to see which countries support that.
+
+11:13.060 --> 11:15.810
+If we save the file We're going to get that list back in just a moment.
+
+11:15.820 --> 11:18.120
+Here we have all of the countries that support it.
+
+11:18.190 --> 11:21.690
+Everything from Belgium all the way down to Zimbabwe.
+
+11:21.700 --> 11:24.910
+Spain all those countries are included.
+
+11:24.910 --> 11:28.230
+Next up Cod cod.
+
+11:28.270 --> 11:29.440
+You should just have that one.
+
+11:29.440 --> 11:31.710
+Canada doesn't need Shop-Rite there.
+
+11:31.840 --> 11:35.950
+So this point we have all the data we need to actually get things done.
+
+11:35.980 --> 11:40.600
+So together we're going to build the equivalent of this function over and at Promises and you're going
+
+11:40.600 --> 11:43.460
+to be building out the async one over here.
+
+11:43.480 --> 11:44.740
+Let's go ahead and get started.
+
+11:44.740 --> 11:47.990
+Konst convert currency.
+
+11:48.030 --> 11:50.110
+I was going to be the function will be building.
+
+11:50.230 --> 11:55.000
+It's the one that you'll eventually make a sink but for now we'll leave it as a regular era function.
+
+11:55.060 --> 11:58.940
+We're going to get the currency code that we're converting from the one we're converting to.
+
+11:59.020 --> 12:04.810
+And the amount we're looking to convert inside of here we can kick things off by getting those countries.
+
+12:04.810 --> 12:11.590
+I'm going to return get countries I get a call that with the currency that we're converting to and then
+
+12:11.590 --> 12:16.610
+we can tack on then and we are going to get the countries list back.
+
+12:16.750 --> 12:18.120
+Perfect.
+
+12:18.130 --> 12:29.040
+Next up we're going to return a call to get exchange rates get exchange rate passing in from and to.
+
+12:29.190 --> 12:34.570
+And we're going to get that back as a promise as well which means we can tack on another then call here.
+
+12:34.620 --> 12:35.910
+We're going to get that rate
+
+12:38.940 --> 12:41.540
+now down below inside of this one.
+
+12:41.610 --> 12:46.470
+We can go ahead and actually calculate all of the stuff we're going to calculate in this case we're
+
+12:46.470 --> 12:49.260
+going to generate that long string I was talking about.
+
+12:49.470 --> 12:53.590
+Let's first start off by creating a concert.
+
+12:53.640 --> 13:02.500
+This concert will be called exchanged amount and we're going to do is take the amount the user passed
+
+13:02.530 --> 13:06.250
+in and multiply it by the exchange rate.
+
+13:06.250 --> 13:11.310
+So in this case we would successfully convert U.S. dollars from Canadian dollars now.
+
+13:11.320 --> 13:15.070
+And down below we can go ahead and start working on that string.
+
+13:15.070 --> 13:20.590
+We're going to return the template string and inside of here we're going to do quite a few things.
+
+13:20.590 --> 13:28.690
+So first off we're going to start off with the amount the amount in the currency you're coming from
+
+13:30.590 --> 13:36.560
+is worth then we're going to put the amount in the currency you're going to that's the exchanged amount
+
+13:36.560 --> 13:37.350
+right here.
+
+13:40.160 --> 13:43.660
+And then we'll toss in too.
+
+13:43.680 --> 13:48.730
+So this is part one we can actually go ahead and test this out before even moving on down below.
+
+13:48.840 --> 13:55.050
+I'm going to switch the get countries call over to a convert currency call and we're going to go ahead
+
+13:55.050 --> 14:01.080
+and convert Canadian dollars over to U.S. dollars and let's go ahead and convert 100 of those.
+
+14:01.080 --> 14:06.780
+Now we're in the anti-status back as opposed to actually getting back the countries list and we can
+
+14:06.780 --> 14:11.480
+go ahead and save currency convert and see what happens over inside of the terminal over here.
+
+14:11.610 --> 14:16.790
+We get 100 Canadian dollars is worth seventy three point nine for seven U.S. dollars.
+
+14:16.800 --> 14:19.320
+And this is a great first step.
+
+14:19.320 --> 14:23.970
+Now we're also going to tack on that countries list which we do not have access to in this function.
+
+14:24.120 --> 14:29.900
+So we can go through the same step we used last time will create 10 countries up above.
+
+14:29.900 --> 14:36.830
+We can make a new variable called countries and we'll set countries equal to 10 countries right here
+
+14:40.330 --> 14:41.070
+excellent.
+
+14:41.080 --> 14:45.000
+Now we'll be able to access those countries and do something with them.
+
+14:45.010 --> 14:45.680
+What are we going to do.
+
+14:45.700 --> 14:52.660
+We're just going to join them altogether separated by a comma to create that nice list that will be
+
+14:52.870 --> 15:00.900
+the currency that we're talking about the two currency can be used in the following countries.
+
+15:03.260 --> 15:07.620
+Right here we had a call in and then we will interpolate the following.
+
+15:07.630 --> 15:11.080
+So we're going to take all those countries.
+
+15:11.140 --> 15:16.450
+We're going to take that in array and we're going to convert it over to a string using join what we
+
+15:16.450 --> 15:17.900
+want to put between all of them.
+
+15:18.010 --> 15:22.330
+We're going to put a comma and a space we're going to create a comma separated list of countries that
+
+15:22.330 --> 15:24.720
+that currency can be used in.
+
+15:24.730 --> 15:29.080
+Now we can go ahead and save currency convert and see what happens over inside a gnomon when things
+
+15:29.090 --> 15:33.720
+restart a hundred Canadian dollars is worth 73 U.S. dollars.
+
+15:33.730 --> 15:37.120
+U.S. dollar can be used in the following countries.
+
+15:37.120 --> 15:38.510
+Let's say you got a typo.
+
+15:38.800 --> 15:39.900
+CA should be.
+
+15:39.990 --> 15:42.670
+Can we have a list of all the countries we can use it in.
+
+15:42.850 --> 15:44.470
+Let's go ahead and test that a different variation.
+
+15:44.470 --> 15:48.490
+Let's go ahead and switch us dollars over to Canadian dollars.
+
+15:50.660 --> 15:52.730
+This time around we're going to get different output.
+
+15:52.730 --> 15:57.800
+We can see 100 U.S. dollars is worth 135 Canadian dollars the Canadian dollar can be used in the following
+
+15:57.800 --> 15:58.440
+countries.
+
+15:58.460 --> 16:00.250
+In this case just Canada.
+
+16:00.410 --> 16:02.060
+But everything is working as expected.
+
+16:02.060 --> 16:05.250
+The problem is we're using promise changing in order to get everything done.
+
+16:05.270 --> 16:11.690
+So your job's going to convert this over to a sink a wait and you're going to do that right here.
+
+16:11.700 --> 16:12.150
+Create
+
+16:14.700 --> 16:21.920
+convert currency alt as a sink function.
+
+16:22.050 --> 16:27.660
+So just like we did over inside an app promises you're going to create an async function then you're
+
+16:27.660 --> 16:39.880
+going to fetch both pieces of data using a weight get countries and erate using a weight and are two
+
+16:40.300 --> 16:45.580
+functions so you're going to await both of these promises and then you're going to store that value
+
+16:45.580 --> 16:46.640
+in some variable.
+
+16:46.660 --> 16:50.010
+You can create a country's variable and a rate variable.
+
+16:50.050 --> 16:55.870
+Finally you'll be able to take these two lines and just tack those on at the end that'll calculate the
+
+16:55.870 --> 16:59.830
+exchanged amount and it will return the correct information.
+
+17:01.280 --> 17:04.510
+Calculate exchanged amount
+
+17:07.300 --> 17:10.760
+return status shrink.
+
+17:10.780 --> 17:13.140
+So in the end of the day your job is to fill that out.
+
+17:13.180 --> 17:16.250
+And it should just take those four lines.
+
+17:16.390 --> 17:22.480
+You have to look at the data one to calculate the exchanged amount and a final one to actually print
+
+17:22.510 --> 17:23.740
+things out.
+
+17:23.740 --> 17:25.940
+Take a bunch of time to knock this one out.
+
+17:25.990 --> 17:27.520
+Feel free to re watch videos.
+
+17:27.520 --> 17:33.730
+Feel free to refer to the previous videos to the Web to the code you wrote right here.
+
+17:33.730 --> 17:39.180
+You can even take this copy it over and use this as a starting point for building out the function that
+
+17:39.190 --> 17:40.870
+you have to build out for this challenge.
+
+17:40.900 --> 17:45.190
+Do whatever you need to do in order to get this done and take as much time as necessary.
+
+17:45.190 --> 17:47.280
+Now if you can't get it done that's perfectly fine.
+
+17:47.380 --> 17:50.630
+As always we're going to go through every single step together.
+
+17:50.650 --> 17:53.100
+But do take an honest crack at this one.
+
+17:53.130 --> 17:54.130
+Pause the video.
+
+17:54.190 --> 17:58.760
+When you're done click play how that one go.
+
+17:58.760 --> 18:01.280
+Hopefully you were able to get it done without too much trouble.
+
+18:01.280 --> 18:07.530
+We're going to go ahead and kick things off by creating that cost convert currency Allt.
+
+18:07.610 --> 18:09.530
+This one is going to be an async function.
+
+18:09.590 --> 18:14.480
+So we have to market as such we can then move on to our arguments list which is exactly the same as
+
+18:14.480 --> 18:17.920
+the other one from two to mount.
+
+18:18.020 --> 18:21.920
+Then we're going to put the arrow and arrow function we're going to open and close our curly braces
+
+18:22.190 --> 18:27.500
+and now we can move on to the first thing which is getting the countries and getting the exchange rate
+
+18:27.800 --> 18:30.300
+going to start off with countries Konst countries.
+
+18:31.410 --> 18:40.780
+Equals we are going to await the promise that comes back from get countries and what countries do we
+
+18:40.780 --> 18:45.400
+want to get the ones where the two currency is able to be used.
+
+18:45.490 --> 18:48.150
+Then we're going to move on down below to a rate.
+
+18:48.160 --> 18:54.490
+So Konst rate in this case we're also trying to await something we're trying to await the promise that
+
+18:54.490 --> 18:57.860
+comes back from Get exchange rate.
+
+18:57.910 --> 19:06.570
+We're trying to get the exchange rate right here from from end to 2 just like we had up above.
+
+19:06.730 --> 19:11.290
+So at this point we have all that data and we can move on to calculating the exchanged amount and returning
+
+19:11.290 --> 19:12.000
+the string.
+
+19:12.070 --> 19:13.090
+We already built that out.
+
+19:13.090 --> 19:14.770
+There's no need to recreate it.
+
+19:14.830 --> 19:20.100
+We can just copy both of those lines paste them below and then we go.
+
+19:20.190 --> 19:22.970
+Everything is done now down below.
+
+19:22.980 --> 19:30.180
+Instead of calling convert currency we're able to call convert currency Allt passing in the exact same
+
+19:30.180 --> 19:32.040
+arguments and getting back the status.
+
+19:32.040 --> 19:38.450
+The difference is that our function is using a sink a whole lot more readable much easier to work with.
+
+19:38.490 --> 19:43.770
+We're going to go ahead and save currency convert that is going to run through the process of getting
+
+19:43.770 --> 19:47.530
+all that data converting it and then we're going to go ahead and print the status.
+
+19:47.640 --> 19:49.210
+And what do we get in the end of the day.
+
+19:49.380 --> 19:55.500
+Over here we get the exact same thing a hundred U.S. dollars is still worth 135 Canadian dollars and
+
+19:55.500 --> 19:57.650
+it can still just be used in Canada.
+
+19:57.750 --> 20:02.520
+So that is it for the challenge and that is it for the video in the next video.
+
+20:02.610 --> 20:07.350
+We're going to talk about a few other places we can use a sink in this example and we're also going
+
+20:07.350 --> 20:10.430
+to talk about how we can work with and handle errors.
+
+20:10.470 --> 20:11.660
+It's all coming up next.
+
+20:11.670 --> 20:13.070
+I'm excited to get to it.
+
+20:13.080 --> 20:14.240
+So stay tuned.
+
+20:14.250 --> 20:15.070
+I'll see you then.

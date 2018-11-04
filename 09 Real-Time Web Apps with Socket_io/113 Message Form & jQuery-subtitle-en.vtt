@@ -1,0 +1,802 @@
+WEBVTT
+
+00:00.270 --> 00:03.460
+In this video you're going to add a form field to your index.
+
+00:03.510 --> 00:08.340
+HCM el file this is going to render an input field and a button to the screen and a user is going to
+
+00:08.340 --> 00:13.950
+be able to interact with that as opposed to having to call socket dot emit from the developer tools
+
+00:14.130 --> 00:17.020
+which is not a sustainable option for real users.
+
+00:17.010 --> 00:19.410
+This only works for us developers.
+
+00:19.410 --> 00:24.150
+Now in order to get started we're going to be editing index dot HTL and then we're going to move into
+
+00:24.210 --> 00:25.680
+index dot J.S..
+
+00:25.860 --> 00:29.270
+We're going to add a listener that's going to wait for the form to be submitted.
+
+00:29.340 --> 00:36.300
+And inside of that listener call back we are going to fire socket Dummett with the data typed in the
+
+00:36.300 --> 00:37.320
+field.
+
+00:37.320 --> 00:42.540
+We're also going to take a moment to render all incoming messages to the screen at the end of this video
+
+00:42.540 --> 00:46.610
+will have a ugly yet working chat application.
+
+00:46.620 --> 00:52.110
+Now before we do any of that we are going to be using a library called the Jay Querrey to do DOM manipulation
+
+00:52.350 --> 00:57.360
+which means that we want to be able to do stuff with our rendered DML but we want to be able to do that
+
+00:57.360 --> 00:59.220
+from our javascript file.
+
+00:59.250 --> 01:04.800
+We're going to use Jey query to make that a lot easier in terms of cross browser compatibility to grab
+
+01:04.800 --> 01:10.660
+this library we're going to head over to Google Chrome go to Jay Querrey dot com and you can grab the
+
+01:10.660 --> 01:11.990
+most recent version.
+
+01:12.070 --> 01:13.970
+The version is not going to matter for here.
+
+01:14.020 --> 01:17.740
+We're using very basic features available in all versions.
+
+01:17.740 --> 01:19.510
+I'm grabbing the most recent version.
+
+01:19.510 --> 01:20.650
+Three point one.
+
+01:20.650 --> 01:21.710
+Point zero.
+
+01:21.820 --> 01:25.570
+Then I'm going to go ahead and download decompressed production version.
+
+01:25.570 --> 01:28.140
+Am I right clicking and opening it in a new tab.
+
+01:28.150 --> 01:34.310
+Here we have the actual javascript that we want to load in to our application which means we can Right-Click
+
+01:34.420 --> 01:36.100
+some sort of empty area.
+
+01:36.300 --> 01:44.980
+Save As and go into our projects folder desktop node A Chat App public J.S. and inside of japes I'm
+
+01:44.980 --> 01:49.680
+going to create a new directory called libs where we'll store third party javascript.
+
+01:49.750 --> 01:54.340
+We're going to be working with a few more client side javascript libraries throughout the section so
+
+01:54.340 --> 01:56.970
+it's nice to create a folder to stay organized.
+
+01:57.220 --> 01:58.650
+I'm going to save that in there.
+
+01:58.720 --> 02:01.300
+Close the tab as well as the downloads area.
+
+02:01.390 --> 02:08.740
+And now we can go ahead and load it into index dot h DML and at our forum down here just between socket
+
+02:08.770 --> 02:16.230
+I O an index Scott J.S. we're going to add a new script tag to load and Jay Querrey we've got to specify
+
+02:16.230 --> 02:23.250
+that source attribute with the path to the file forward slash J.S. forward slash libs followed by a
+
+02:23.250 --> 02:32.920
+forward slash and the file name Jay Querrey hyphen three point one point zero dot men dot J.
+
+02:32.950 --> 02:34.540
+S awesome.
+
+02:34.550 --> 02:40.060
+And now let's go ahead and set up our form at TAG this is going to render our form fields to the browser.
+
+02:40.160 --> 02:45.470
+If you're not familiar with these tags that is perfectly fine simply follow along and I'll explain as
+
+02:45.470 --> 02:46.190
+we go.
+
+02:46.250 --> 02:48.220
+First up we need a form tag.
+
+02:48.350 --> 02:51.510
+This creates a form that submittal by the user.
+
+02:51.530 --> 02:54.790
+This is exactly what we're going to use to submit our messages.
+
+02:54.970 --> 02:57.720
+And on this form tag we're going to add one attribute.
+
+02:57.770 --> 03:03.890
+It's the ID attribute which lets us give this element a unique identifier making it really easy to target
+
+03:03.890 --> 03:04.790
+without javascript.
+
+03:04.790 --> 03:10.580
+A bit later on remember we're going to want to add a listener to this element when the form gets submitted.
+
+03:10.580 --> 03:14.510
+We're going to want to do something in our javascript file notably but we're going to want to do is
+
+03:14.570 --> 03:16.740
+call Sacket dot emit.
+
+03:16.940 --> 03:22.600
+I'm going to set id equal to inside of quotes message hyphen form.
+
+03:22.820 --> 03:27.530
+Now that we have a form tag complete we can add some tags inside of it to get started we're going to
+
+03:27.530 --> 03:30.540
+add a button which is going to appear at the bottom of the form.
+
+03:30.650 --> 03:37.070
+This button on click is going to submit the form on opening and closing my tag and just inside I can
+
+03:37.070 --> 03:39.360
+type whatever text I want to appear on the button.
+
+03:39.410 --> 03:42.820
+I'm going to go with send now that we have our button in place.
+
+03:42.830 --> 03:45.900
+The only thing we need to do is add the little text field.
+
+03:45.920 --> 03:50.050
+This is going to be the text field where the user types their message.
+
+03:50.120 --> 03:55.250
+This is going to require us to use an input tag and instead of opening and closing an input tag like
+
+03:55.250 --> 04:00.470
+this we're going to use the self-closing syntax because we don't need to actually put anything inside
+
+04:00.470 --> 04:04.050
+of it like we do for a button here or like we do for form.
+
+04:04.130 --> 04:07.820
+Here we are going to be adding quite a few attributes on input.
+
+04:07.820 --> 04:12.830
+First step name we want to give this field a unique name something like.
+
+04:12.830 --> 04:15.330
+Message is going to get the job done.
+
+04:15.350 --> 04:17.560
+We also want to go ahead and set the type.
+
+04:17.570 --> 04:22.670
+There's a lot of different types for input tags types could include something like a checkbox or in
+
+04:22.670 --> 04:28.910
+our case the type we're going to use inside of quotes is text or the last attribute we're going to add
+
+04:28.910 --> 04:31.180
+to input is called placeholder.
+
+04:31.250 --> 04:35.000
+We're going to set this value equal to inside of quotes a string.
+
+04:35.000 --> 04:40.070
+This string is going to get rendered in the field in a light grey before the user actually enters a
+
+04:40.070 --> 04:41.370
+value.
+
+04:41.470 --> 04:45.870
+I'm going to tell the user that this is where a message goes with this in place.
+
+04:45.960 --> 04:52.450
+We can actually test out our forms rendering by starting up the server using gnomon server forward slash
+
+04:52.520 --> 04:53.120
+server.
+
+04:53.120 --> 04:55.940
+J.S. and going to local host 3000.
+
+04:56.240 --> 04:57.280
+The server is up.
+
+04:57.320 --> 05:02.090
+I'm going to visit Google Chrome go to localhost three thousand and you'll notice something kind of
+
+05:02.090 --> 05:02.680
+cool.
+
+05:02.690 --> 05:07.390
+I haven't actually visited that al yet but you can see that the connection has already occurred.
+
+05:07.400 --> 05:10.770
+Chrome does some lazy loading if it thinks you're going to go to a u r l.
+
+05:10.820 --> 05:12.350
+It's actually going to make the request.
+
+05:12.350 --> 05:15.050
+So when I do visit it it loads even faster.
+
+05:15.050 --> 05:17.540
+Now if I visit localhost three thousand What do we get.
+
+05:17.540 --> 05:18.750
+We get our little form.
+
+05:18.800 --> 05:23.220
+We can type in a message like test and we can send it off now by default.
+
+05:23.240 --> 05:25.030
+Forms are very old school.
+
+05:25.070 --> 05:30.470
+If I try to submit this form it's actually going to go through a full page refresh then it's going to
+
+05:30.530 --> 05:34.930
+add to the data like our message text as a query string you are l.
+
+05:35.000 --> 05:36.590
+This is not what we want to do.
+
+05:36.620 --> 05:40.210
+We want to run some custom javascript on forms submit.
+
+05:40.310 --> 05:45.970
+So we're going to attach a custom event listener and override the default behavior to get that done
+
+05:45.980 --> 05:51.050
+we are going to have to use J query and we're going to need to select this form field before we dive
+
+05:51.050 --> 05:52.140
+into index Dot.
+
+05:52.180 --> 05:57.590
+Yes let's take a quick moment to talk about how we can use Jey query to select elements J query which
+
+05:57.590 --> 06:00.730
+is accessible via the J query variable with an uppercase.
+
+06:00.740 --> 06:08.470
+Q takes as its argument your selector right here we're going to add a string and we can select our elements.
+
+06:08.480 --> 06:14.090
+For example if we want to select all the paragraph tags on the screen we would type P in here.
+
+06:14.090 --> 06:18.590
+These are really similar to CSSA selectors if you're familiar with them and right here we've selected
+
+06:18.590 --> 06:20.130
+our paragraph tag.
+
+06:20.210 --> 06:25.730
+I could also go ahead and select all of the divs inside of my program or I could select elements by
+
+06:25.730 --> 06:27.050
+ID or class.
+
+06:27.080 --> 06:30.880
+And that's what we're going to do in order to select an element by ID.
+
+06:30.920 --> 06:35.840
+We first start with the pound sign and then we type the name and our case we have a form called Message
+
+06:36.200 --> 06:37.230
+hyphen form.
+
+06:37.310 --> 06:40.630
+And if I fire this off we do indeed get that back.
+
+06:40.640 --> 06:45.800
+This is going to allow us to add an event listener over inside of index.
+
+06:45.880 --> 06:52.730
+Yes we're going to add that exact same selector near the bottom Jay query calling it with our selector
+
+06:53.060 --> 06:59.150
+pound sign message hyphen form and now we're going to add an event listener and the event listener is
+
+06:59.150 --> 07:04.520
+going to look pretty similar to our socket I O event listeners we are going to be calling on and we
+
+07:04.520 --> 07:10.910
+are going to be providing those two arguments the event name inside of quotes submit and a function.
+
+07:10.910 --> 07:15.200
+This function is going to fire when a user tries to submit the form.
+
+07:15.200 --> 07:21.280
+Now unlike our socket I O event listeners we are going to get one argument right here.
+
+07:21.320 --> 07:25.500
+The event argument and we are going to need to access this.
+
+07:25.640 --> 07:30.920
+We're going to need to access this event argument in order to override that default behavior that causes
+
+07:30.920 --> 07:33.290
+that page refresh right here.
+
+07:33.410 --> 07:41.520
+We're going to call the DOT prevent default prevent default prevents the default behavior for the event
+
+07:41.690 --> 07:46.310
+and by default a submitter that goes through that page refresh process.
+
+07:46.310 --> 07:51.560
+We can go ahead and test that everything is working by going into Google Chrome giving the page a refresh
+
+07:52.350 --> 07:55.230
+also going to remove the query string from the U r l.
+
+07:55.250 --> 07:58.060
+Now we can type in some sort of message like test.
+
+07:58.060 --> 08:03.570
+Hit send and you can see that nothing happens nothing happens because we overrode the default behavior.
+
+08:03.590 --> 08:10.610
+All we need to do to make something happen is call socket dot emit.
+
+08:10.700 --> 08:13.690
+We're going to emit the create message event right here.
+
+08:14.750 --> 08:19.820
+Create message and we're going to go ahead and provide our data.
+
+08:19.880 --> 08:24.550
+Now the name from field for now is just going to be user in upper case.
+
+08:24.590 --> 08:28.700
+We're going to leave this as anonymous for the moment although we will be updating that a bit later
+
+08:28.820 --> 08:29.900
+in the section.
+
+08:29.900 --> 08:34.760
+Now the textfield this is going to come from the form we're going to want to add a selector and we're
+
+08:34.760 --> 08:37.010
+going to want to get the value back.
+
+08:37.220 --> 08:39.890
+Let's go ahead and do that using Jay Querrey.
+
+08:39.940 --> 08:45.490
+We're going to call Jay Coria once again and we're going to select this input right here.
+
+08:45.490 --> 08:51.210
+We can go ahead and selected by its name name equals message in order to get that done.
+
+08:51.220 --> 08:57.110
+We're going to open up brackets like this setting name equal to message.
+
+08:57.150 --> 09:01.900
+This is going to select any element that has a name attribute equal to a message which is just our one
+
+09:02.190 --> 09:06.140
+and we can go ahead and get its value using the dot Vau method.
+
+09:06.280 --> 09:09.460
+No semi-colon required since we're inside of object creation.
+
+09:09.700 --> 09:15.970
+With this in place we can now go ahead and add our callback function for our knowledge amn't for the
+
+09:15.970 --> 09:18.640
+moment it doesn't really do anything but that's perfectly fine.
+
+09:18.640 --> 09:24.010
+We have to add it in order to fulfill the acknowledgment setup we currently have in place now that we
+
+09:24.010 --> 09:25.620
+have our event listener set up.
+
+09:25.620 --> 09:27.230
+Let's go ahead and test this out.
+
+09:27.460 --> 09:33.240
+I'm going to head back into Krumm give the page a refresh type in some message like this should work.
+
+09:34.580 --> 09:38.190
+And when we submit the form we should see it show up over here as a new message.
+
+09:38.270 --> 09:42.950
+I'm going to send it off and you can see that right inside of the terminal we have a user sending this
+
+09:42.950 --> 09:43.660
+should work.
+
+09:43.700 --> 09:50.210
+And it also shows up right here the same thing is true if I open up a second connection I'm going to
+
+09:50.210 --> 09:54.310
+open up the developer tools so he can see exactly what's happening behind the scenes.
+
+09:54.350 --> 09:58.950
+I'm going to type some message like from tab to send it off.
+
+09:59.090 --> 10:01.760
+And we should see it over in tab 1 and we do.
+
+10:01.760 --> 10:02.330
+Perfect.
+
+10:02.330 --> 10:04.370
+Everything is working as expected.
+
+10:04.370 --> 10:06.410
+Now obviously the set is not complete.
+
+10:06.410 --> 10:10.820
+We want to wipe that form value after we send the message and we want to take care of a few other you
+
+10:10.820 --> 10:11.680
+I related things.
+
+10:11.690 --> 10:14.290
+But for now it is working pretty well.
+
+10:15.130 --> 10:20.700
+With a basic form in place the second thing we're going to do is render incoming messages to the screen.
+
+10:20.710 --> 10:25.500
+Now once again it is going to look pretty ugly but it will get the job done to get this done.
+
+10:25.510 --> 10:29.610
+We have to create a place inside of our Dom inside of our index.
+
+10:29.640 --> 10:33.220
+H Tim L file where we can render the messages.
+
+10:33.220 --> 10:38.780
+Once again we're going to give this element a idea that we can easily access over inside of index just
+
+10:38.920 --> 10:41.320
+so we can render those messages.
+
+10:41.320 --> 10:47.900
+First up what we're going to do is create a ordered list by creating an AOL tag just like this.
+
+10:47.920 --> 10:53.920
+This list is going to let us add items to it and those items are going to be the individual messages.
+
+10:53.920 --> 10:56.760
+Now we are going to be giving this an id attribute.
+
+10:56.830 --> 11:01.420
+I'm going to call the I.D. in this case messages awesome.
+
+11:01.830 --> 11:04.440
+Now this is all we need to do in indexed out HDMI.
+
+11:04.450 --> 11:07.820
+All of the heavy lifting is going to happen over inside of index.
+
+11:07.870 --> 11:08.570
+Yes.
+
+11:08.640 --> 11:13.590
+When a new message comes in we want to add something inside of the ordered list so that gets rendered
+
+11:13.650 --> 11:16.500
+to the screen over inside of index Dhananjay.
+
+11:16.500 --> 11:22.150
+Yes we can get this done by modifying our callback function when a new message arrives.
+
+11:22.230 --> 11:27.270
+The first thing we're going to do is create a list item and we're going to do this once again using
+
+11:27.270 --> 11:28.150
+Jay Querrey.
+
+11:28.200 --> 11:29.700
+We're going to make a variable.
+
+11:29.760 --> 11:36.070
+This variable is going to be called out I and we're going to go ahead and use Jay query slightly differently
+
+11:36.450 --> 11:41.550
+rather than using Jay Querrey to select an element we're going to use Jay Querrey to create an element
+
+11:41.760 --> 11:48.300
+and then we can modify that element and add it into the markup making it visible right here inside of
+
+11:48.300 --> 11:48.720
+quotes.
+
+11:48.720 --> 11:54.730
+We're going to open and close an ally tag just like we would inside of index dot H.T. amount.
+
+11:54.900 --> 11:58.920
+Now that we have this in place we have to go ad in its text property.
+
+11:59.190 --> 12:04.970
+I'm going to set ally dot text by calling ally dot text with de-value.
+
+12:05.010 --> 12:11.070
+I want to use in this case the text is going to require us to set up a little template string inside
+
+12:11.070 --> 12:12.450
+of the template string.
+
+12:12.450 --> 12:15.680
+We are going to go ahead and use the data that comes back.
+
+12:15.690 --> 12:19.880
+For now we're going to use the frim attribute and the text attribute.
+
+12:19.890 --> 12:21.740
+Let's get started with who it's from.
+
+12:21.810 --> 12:26.210
+Then we'll add a little colon and a space to separate that from the actual message.
+
+12:26.250 --> 12:30.590
+And finally it will inject message text at the end.
+
+12:30.600 --> 12:34.000
+Now at this point we've created an element but we haven't rendered it to the DOM.
+
+12:34.080 --> 12:38.130
+What we're going to do is use a query to select that brand new element we created.
+
+12:38.220 --> 12:45.300
+We gave it an idea of messages and we're going to append something to it by calling the append method.
+
+12:45.300 --> 12:47.880
+This is going to add it as its last child.
+
+12:47.880 --> 12:49.680
+So there's already three items in the list.
+
+12:49.680 --> 12:54.860
+The newest one will show up below those three as the fourth item in our ordered list.
+
+12:54.990 --> 12:59.310
+Oh we have to do is call append as a function passing in our list item.
+
+12:59.460 --> 13:01.390
+And with this in place we are done.
+
+13:01.410 --> 13:06.210
+Now if you're not familiar with J queries this can be a bit overwhelming but I promise the techniques
+
+13:06.210 --> 13:10.950
+we use here will be using throughout the course by the end you'll be much more comfortable selecting
+
+13:10.980 --> 13:13.290
+and creating elements.
+
+13:13.290 --> 13:16.080
+Let's go ahead and test things out over inside of Google Chrome.
+
+13:16.080 --> 13:22.480
+I'm going to refresh tab 1 and when I do you can see from is not defined over in the right hand side.
+
+13:22.500 --> 13:29.310
+If I go back into Adam this is most likely just a really small typo and you can see that is the case.
+
+13:29.310 --> 13:35.160
+Message from is defined which means I can save the file and give things a refresh simple errors like
+
+13:35.160 --> 13:38.050
+this can easily be checked down using the developer tools.
+
+13:38.070 --> 13:43.050
+They actually give you some pretty great error information as well as an entire call stack on the right
+
+13:43.050 --> 13:43.740
+hand side.
+
+13:43.770 --> 13:45.750
+You can usually click this little link.
+
+13:45.780 --> 13:50.240
+This is going to bring you to the sources tab but it's going to show you exactly where the error occurred.
+
+13:50.250 --> 13:55.770
+Here you can see not only the line the error occurred but the actual indentation into the line the error
+
+13:55.890 --> 13:57.740
+occurred right here.
+
+13:57.750 --> 14:03.060
+This is really fantastic it makes the bugging much easier if you run into an error inside of the console.
+
+14:03.060 --> 14:09.380
+You can usually get more information by either expanding it or going right to the source of the problem.
+
+14:09.420 --> 14:14.660
+Now that we've fixed that error and we give the app a refresh we do see are two messages.
+
+14:14.670 --> 14:16.430
+Welcome to the chat app shows up.
+
+14:16.440 --> 14:18.390
+And Frank says hi.
+
+14:18.600 --> 14:19.670
+Now welcome to the chat app.
+
+14:19.670 --> 14:24.850
+Should Show Up the Frank Hyde message is coming from right here inside an index Dot.
+
+14:24.910 --> 14:30.540
+Yes we can actually go ahead and remove that we no longer need to automatically emit messages since
+
+14:30.540 --> 14:33.810
+we have a form set up to get that done for us.
+
+14:33.810 --> 14:39.510
+Once again we can save the file refresh the browser and this time around we have a nice little setup.
+
+14:39.510 --> 14:41.800
+Welcome to the chat app.
+
+14:41.820 --> 14:46.470
+I'm going to do the same thing for our second tab this time around we get Welcome to the chat app.
+
+14:46.470 --> 14:51.270
+And in the first how we get new user joined this is fantastic.
+
+14:51.270 --> 14:56.900
+Now the true test is going to be to send a message from one tab to the other.
+
+14:56.920 --> 15:01.770
+This should go to tab two.
+
+15:02.110 --> 15:06.130
+I'm going to send this off and when I click this button it's going to emit the event that's going to
+
+15:06.130 --> 15:09.880
+go to the server and the server is going to send it to everyone connected.
+
+15:09.880 --> 15:15.250
+Right here I can see this should go to tab two renders and over inside of my second tab we get the message
+
+15:15.280 --> 15:16.120
+as well.
+
+15:16.120 --> 15:17.800
+I can come here and respond.
+
+15:19.300 --> 15:22.390
+And when I respond it shows up in both tabs.
+
+15:22.390 --> 15:25.930
+Now we're not quite done with the UI or the actual user experience.
+
+15:25.930 --> 15:30.880
+Custom names and time stamps are coming up but we do have a fantastic start.
+
+15:30.880 --> 15:36.430
+We now have a form where we can submit messages and we can see all of the incoming messages inside of
+
+15:36.490 --> 15:40.360
+the browser which means we didn't need to do anything in the developer tools anymore.
+
+15:40.480 --> 15:45.700
+In terms of a meeting or reading our messages that is it for this one let's go ahead and wrap things
+
+15:45.700 --> 15:49.210
+up by making a commit now that we have some working changes.
+
+15:49.300 --> 15:51.540
+I'm going to shut down the server.
+
+15:51.880 --> 15:56.080
+Clear the output and run it get status so he can double check all of our changes.
+
+15:56.080 --> 15:57.620
+Everything looks good here.
+
+15:57.700 --> 15:58.150
+I'm going to use.
+
+15:58.150 --> 16:01.290
+Get add to add all of the files including my untracked.
+
+16:01.300 --> 16:04.040
+Jay Querrey file to the repo then I can use.
+
+16:04.040 --> 16:06.670
+Get commit to make the commit.
+
+16:06.670 --> 16:15.390
+I'm going to use the flag here and a good message for this one would be add form for messages and show
+
+16:15.870 --> 16:24.430
+incoming messages in browser once we have this in place we can go ahead and push this up to get how
+
+16:24.440 --> 16:29.400
+but I am going to take a moment to deploy the Heroku now that we have something real visible and tangible
+
+16:29.430 --> 16:34.820
+to use get push Heroku master is going to get that done.
+
+16:35.130 --> 16:40.140
+Once this is up we'll be able to visit it in the browser as you can see over inside of my council socket
+
+16:40.170 --> 16:42.300
+I O is trying to reconnect to the server.
+
+16:42.300 --> 16:46.950
+Unfortunately we're not going to be bringing it back up so it's going to try a little longer.
+
+16:46.950 --> 16:50.840
+Here we are we're verifying the deploy and everything is up and running.
+
+16:50.850 --> 16:53.130
+You can either on Heroku open or copy this.
+
+16:53.130 --> 16:59.250
+You are out directly I'm going to go ahead and close my two localhost tabs and open up the actual Heroku
+
+16:59.550 --> 17:00.890
+app right here.
+
+17:00.900 --> 17:02.900
+We do get our Welcome to the chat app message.
+
+17:02.910 --> 17:05.710
+And we do get our form everything looks good so far.
+
+17:05.880 --> 17:12.930
+I'm going to go ahead and open up a different browser like Safari going to go to the chat app as well.
+
+17:14.910 --> 17:18.570
+And we're going to bring these windows side by side over inside a safari.
+
+17:18.570 --> 17:19.950
+I'm going to type a little message.
+
+17:19.950 --> 17:22.490
+This is live on Heroku.
+
+17:22.830 --> 17:29.580
+Click send or hit the enter key and instantly it shows up in the other browser in the other tab.
+
+17:29.580 --> 17:33.930
+This is because our lives socket server is transmitting this data.
+
+17:33.930 --> 17:38.340
+This could happen between any computer in the world you do not need to be on my machine since we're
+
+17:38.340 --> 17:40.560
+using a real Heroku you are.
+
+17:40.740 --> 17:43.730
+Now that everything's working on Heroku we are done.
+
+17:43.770 --> 17:45.330
+I will see you next time

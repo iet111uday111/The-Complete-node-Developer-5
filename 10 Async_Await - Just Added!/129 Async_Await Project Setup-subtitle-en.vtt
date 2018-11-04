@@ -1,0 +1,874 @@
+WEBVTT
+
+00:00.700 --> 00:07.870
+Hello and welcome to a brand new section on iOS 7 async a wait in this section or going to go through
+
+00:07.870 --> 00:13.030
+the process of learning how async a way it works what exactly it is and where it's going to fit into
+
+00:13.030 --> 00:13.910
+what we know about node.
+
+00:13.920 --> 00:15.800
+All ready now to kick things off.
+
+00:15.820 --> 00:19.820
+A single weight is a feature that is not available in all versions of Node.
+
+00:19.990 --> 00:23.950
+You have to be using the seven point six or greater.
+
+00:23.980 --> 00:25.140
+So if you are on the 7.
+
+00:25.150 --> 00:27.980
+Just make sure you are on 7.6 or greater.
+
+00:28.030 --> 00:33.700
+But if we go over to node j s dot org you're going to see that B is actually out so we can go ahead
+
+00:33.910 --> 00:35.310
+and just upgrade to V8.
+
+00:35.350 --> 00:40.780
+Right now it's perfectly fine and there's a newer version you can go ahead and grab that as well as
+
+00:40.780 --> 00:43.210
+long as it's a 7.6 or up.
+
+00:43.210 --> 00:48.450
+So 6.10 it's not going to have the syntax that we're about to dive into.
+
+00:48.490 --> 00:55.660
+Now before we actually use async away we're going to go ahead and run through an example that just uses
+
+00:55.660 --> 00:56.550
+promises.
+
+00:56.560 --> 01:02.140
+So we're going to be using techniques we already know to set up a little example project.
+
+01:02.260 --> 01:06.790
+Now when people hear about async away they think that right away they need to forget everything they
+
+01:06.790 --> 01:09.960
+know about callbacks and promises and that is not true.
+
+01:10.160 --> 01:13.810
+Eysenck weight is not a third option.
+
+01:13.810 --> 01:16.960
+It is more like an enhancement for promises.
+
+01:16.990 --> 01:21.430
+So we're going to go through an example using just regular old promises things you already know how
+
+01:21.430 --> 01:26.120
+to do then we're going to see how async a weight can enhance that code.
+
+01:26.170 --> 01:28.650
+So to kick things off we do need a place to put all of this.
+
+01:28.900 --> 01:37.030
+I'm going to make a brand new project on my desktop a sink away at we can crack that open in our editor
+
+01:37.270 --> 01:40.480
+and make sure to crack it open in your terminal as well.
+
+01:41.540 --> 01:43.190
+Perfect.
+
+01:43.190 --> 01:46.670
+Now the goal here is to just make a very very simple project.
+
+01:46.670 --> 01:49.370
+We're not going to need any node modules for this one.
+
+01:49.490 --> 01:52.780
+And we are just going to need a single file.
+
+01:52.850 --> 01:58.470
+This file can set in the root of the project and we'll just call it app promises.
+
+01:58.630 --> 02:04.070
+It s this is going to be the version of our application that just uses promises.
+
+02:04.100 --> 02:08.540
+Now before we go any further I do want to give you a quick idea as to what the section is going to look
+
+02:08.540 --> 02:09.050
+like.
+
+02:09.110 --> 02:11.630
+We're going to go through three distinct things.
+
+02:11.630 --> 02:17.870
+First up thing one we are going to create a very contrived example and this is going to allow us to
+
+02:17.870 --> 02:22.240
+learn how to use a sink a weight without a lot of overhead or baggage.
+
+02:22.280 --> 02:28.090
+So we're going to be creating constants like users which would just be an array of objects and constants
+
+02:28.100 --> 02:29.420
+like grades.
+
+02:29.420 --> 02:31.080
+Also an array of objects.
+
+02:31.220 --> 02:33.730
+And this is going to be what a database would look like.
+
+02:33.740 --> 02:38.090
+Obviously there is nothing asynchronous about accessing some property from an array.
+
+02:38.120 --> 02:43.370
+So we're going to go ahead and create some new promises to turn a synchronous process into an asynchronous
+
+02:43.370 --> 02:49.740
+one to the first project is not very real world but it is going to be a great way to learn the new syntax.
+
+02:49.850 --> 02:54.190
+Then we're going to move on to another little project where you're going to be required to make two
+
+02:54.200 --> 02:56.880
+actual API calls to API.
+
+02:56.900 --> 03:03.190
+I picked out those will be asynchronous and will use async await there to wrap things up.
+
+03:03.230 --> 03:08.210
+We're going to add a little bit of async awake code back into the to do API.
+
+03:08.360 --> 03:13.190
+So to kick things off we're going to go through this very contrived example and we can start by creating
+
+03:13.190 --> 03:18.650
+a few users to work with each user object is going to have a few properties.
+
+03:18.650 --> 03:22.790
+We'll start off with an id just like they would have inside of a real database.
+
+03:22.790 --> 03:28.440
+I'm going to give this one an idea of one will also have a name a string name for the user.
+
+03:28.550 --> 03:34.610
+I want to call the first one Andrew and then we're going to move on to the final property a school ID
+
+03:34.910 --> 03:38.790
+and ID that will change as the students switches from one school to another.
+
+03:38.870 --> 03:41.360
+We can just make up another ID for this one.
+
+03:41.360 --> 03:43.880
+I'm going to go ahead and start at 1 0 1.
+
+03:44.300 --> 03:48.020
+Now that we have that user number one created Let's go ahead and clone him.
+
+03:48.960 --> 03:53.340
+I'm going to copy Tasik comma and paste it and we'll create just one more user.
+
+03:53.340 --> 03:59.340
+For this example this one will have an idea of two will change the name from Andrew over to something
+
+03:59.370 --> 04:00.910
+like Jessica.
+
+04:01.320 --> 04:05.020
+And we'll give her a school ID of nine nine nine.
+
+04:05.070 --> 04:05.780
+Perfect.
+
+04:05.970 --> 04:10.770
+Now that we have some users in place we're going to create our first of three functions will be building
+
+04:10.770 --> 04:11.900
+in this video.
+
+04:11.910 --> 04:13.250
+This one is called Konst.
+
+04:13.290 --> 04:21.670
+Get user it is going to take the ID of the user and it is going to find that user and return the user
+
+04:21.700 --> 04:22.300
+object.
+
+04:22.300 --> 04:28.070
+So if the ID is one I'm going to get this object back if it's I'm going to get this object back if it's
+
+04:28.090 --> 04:30.660
+theory or some other ID that doesn't exist.
+
+04:30.700 --> 04:33.280
+I'm going to actually have an error thrown in.
+
+04:33.430 --> 04:38.890
+So this is going to return a promise I'll resolve if the ID is a match with one of the users I'll reject.
+
+04:38.950 --> 04:42.490
+If it's not now as I mentioned this is a contrived example.
+
+04:42.580 --> 04:50.170
+So we're going to be creating new promises explicitly I'm going to create a new promise.
+
+04:50.170 --> 04:56.500
+Passing in that promise function which as you remember gets called with resolve and reject.
+
+04:56.500 --> 04:59.780
+Then we're going to go ahead and add a little bit of logic in here.
+
+04:59.800 --> 05:05.830
+The first thing we need to do is try to find a match and I'm going to use the array find method to get
+
+05:05.830 --> 05:06.810
+that done.
+
+05:07.030 --> 05:10.190
+We'll create a cost user to store the match.
+
+05:10.910 --> 05:17.680
+Then we'll set it equal to users ADOT find passing in our function.
+
+05:17.870 --> 05:21.840
+Now this function gets called one time for every item in the array it's an array of users.
+
+05:21.860 --> 05:28.130
+So we can call the individual item user and if we return true it is going to consider that a match.
+
+05:28.160 --> 05:30.320
+It'll stop and it will set that object on it.
+
+05:30.340 --> 05:36.080
+User if we return false it'll continue on through the array and if none are a match undefined will be
+
+05:36.080 --> 05:44.750
+the value for users right here where it is going to return user ID checking if it equals the ID passed
+
+05:44.840 --> 05:45.680
+in.
+
+05:45.680 --> 05:48.440
+Now we have a great candidate for the shorthand syntax here.
+
+05:48.500 --> 05:53.660
+We just have an arrow function that returns some value so we can just provide the value right here and
+
+05:53.660 --> 05:55.430
+have it be implicitly returned.
+
+05:55.430 --> 05:58.410
+Here we have the exact same functionality.
+
+05:58.430 --> 06:02.930
+Now before we go ahead and use it let's go ahead and actually call resolve or reject.
+
+06:03.200 --> 06:05.740
+If there is a user We're going to do one thing.
+
+06:05.900 --> 06:07.570
+If there's not a user that's fine.
+
+06:07.580 --> 06:09.270
+We're just going to do something else.
+
+06:09.270 --> 06:10.230
+Double-O.
+
+06:10.310 --> 06:12.640
+Be Calling reject at up above.
+
+06:12.680 --> 06:13.490
+We'll be calling.
+
+06:13.520 --> 06:20.120
+Resolve never resolve is just going to have the user passed in and for object we can come up with an
+
+06:20.120 --> 06:32.120
+error message that helps the user figure out what went wrong on able to find user with ID of that period.
+
+06:32.180 --> 06:35.960
+And we'll put the idea right here inside of the template string.
+
+06:35.960 --> 06:38.420
+I'm going to reference ID.
+
+06:38.480 --> 06:42.480
+This is the exact value that was passed in up above.
+
+06:42.530 --> 06:49.170
+Now before we go ahead and actually run this let's just use it get user real quick I'm going to call
+
+06:49.170 --> 06:52.010
+get user with an ID of two which should return.
+
+06:52.050 --> 07:00.890
+Jessica I'll add on then and catch inside of catch we can catch that error.
+
+07:00.920 --> 07:03.840
+We're just going to get the error and log it out.
+
+07:03.980 --> 07:05.430
+Console log.
+
+07:07.290 --> 07:08.350
+Perfect.
+
+07:08.380 --> 07:15.110
+Then we can set up our then call back inside of then we're going to get access to the user.
+
+07:15.180 --> 07:17.190
+And for now we'll just lock it out.
+
+07:20.070 --> 07:24.200
+Now to actually run this we're going to head over into the terminal and make sure we do get the expected
+
+07:24.200 --> 07:25.070
+results.
+
+07:25.100 --> 07:27.850
+I'm going to be using node mon to get that done.
+
+07:27.860 --> 07:33.650
+Now if you just updated node it also updated NPM and in the end of the day what that means is that you
+
+07:33.650 --> 07:36.060
+no longer have access to those global modules.
+
+07:36.140 --> 07:43.120
+So you might need to rerun NPM install the gnomon before you can use the gnomon command right here.
+
+07:43.130 --> 07:45.040
+I'm going to use gnomon running.
+
+07:45.050 --> 07:51.050
+The app promises J.S. file and right here we have our output we have Jessica printing with the school
+
+07:51.050 --> 07:56.330
+idea of 9 9 9 and the idea of 2 that is because I passed two in right here.
+
+07:56.690 --> 08:00.760
+If I switch this out for one I should see Andrew I do indeed see Andrew.
+
+08:00.890 --> 08:05.960
+And finally let's go ahead and pass in an idea that doesn't exist like 21 right here.
+
+08:05.960 --> 08:07.040
+I do get the message.
+
+08:07.060 --> 08:10.410
+Unable to find user with ID of twenty one.
+
+08:10.610 --> 08:13.700
+So this is the first of three that we're going to be building.
+
+08:13.700 --> 08:15.740
+Let's go ahead and knock out the other two.
+
+08:15.800 --> 08:16.830
+Real quick.
+
+08:16.880 --> 08:21.820
+This will set us up to actually explore the async await syntax contest.
+
+08:21.860 --> 08:28.580
+Get grades get grades is going to be very similar to get users are the ones that have working with the
+
+08:28.580 --> 08:31.850
+users or it is going to work with the Grae's array.
+
+08:31.850 --> 08:37.100
+Now we don't have any grades set up so let's go ahead and set some up right here.
+
+08:37.100 --> 08:39.970
+We're going to go ahead and create a few grades.
+
+08:40.010 --> 08:43.970
+First up let's create a grade with an idea of 1.
+
+08:43.970 --> 08:46.260
+Now this one is going to be attached to Andrew.
+
+08:46.280 --> 08:51.580
+So we'll go ahead and use the school ID to do that school ID the school ID.
+
+08:51.590 --> 08:54.850
+In this case for andere is 101 then down below.
+
+08:54.860 --> 08:56.990
+We're going to put in the actual grade.
+
+08:56.990 --> 09:00.830
+In this case I'll go ahead and give myself an 86.
+
+09:00.830 --> 09:01.900
+This is grade 1.
+
+09:01.910 --> 09:05.500
+Let's go ahead and create three more real quick.
+
+09:05.650 --> 09:06.640
+I'm going to copy it.
+
+09:06.840 --> 09:09.280
+Toss in a comma and paste it two times.
+
+09:09.280 --> 09:13.300
+This one is going to have an idea of two we can associate this one with Jessica.
+
+09:13.330 --> 09:17.770
+So we'll give her the school ID value of nine nine nine just like I have above.
+
+09:17.800 --> 09:20.850
+And then finally she's real smart so we'll give her a 100.
+
+09:21.070 --> 09:25.590
+Finally of three will leave this one associated with Andrew.
+
+09:25.690 --> 09:30.050
+And down below will give him a grade of an 80.
+
+09:30.050 --> 09:31.790
+Did a little worse this time around.
+
+09:31.990 --> 09:37.630
+So we have some grades in place and the goal is to return all of the grades for a particular student
+
+09:37.630 --> 09:39.450
+based off of their school I.D..
+
+09:39.460 --> 09:43.600
+So if I pass in 101 I would expect an array to come back with this object.
+
+09:43.600 --> 09:49.250
+And with this object if I pass in 9 9 9 I would expect an array to come back with this one.
+
+09:49.480 --> 09:56.020
+And if I pass in a value like fifty five there are going to be no grades for that student.
+
+09:56.140 --> 09:59.080
+So we'll go ahead and return empty array right here.
+
+09:59.170 --> 10:03.640
+We're going to get the school ID that we're using to look things up with then we're going to go ahead
+
+10:03.640 --> 10:04.870
+and return the new promise.
+
+10:04.870 --> 10:07.230
+This is all part of the contrived example.
+
+10:08.490 --> 10:11.480
+Resolve and reject our two arguments
+
+10:15.010 --> 10:24.310
+then right here we're going to go ahead and resolve the filtered grades array that is grades dot filter.
+
+10:24.320 --> 10:29.920
+We're going to filter this one by passing and an arrow function it'll get called with the individual
+
+10:30.540 --> 10:32.130
+grade not user.
+
+10:32.260 --> 10:36.730
+And then we'll go ahead and implicitly return something if we return true it'll be considered a match
+
+10:36.790 --> 10:38.550
+and that grade will be resolved.
+
+10:38.620 --> 10:44.110
+And if we return false that grade will be removed from the array that gets resolved in this case.
+
+10:44.140 --> 10:55.210
+We want to keep the grade if the grade dot school ID equals the school ID that the function was called
+
+10:55.210 --> 10:57.730
+with in this case that is it for get grades.
+
+10:57.730 --> 11:00.190
+We can go ahead and test it out.
+
+11:00.290 --> 11:07.660
+I'm going to call get grades down below instead of get user get a pass in a valid school Id like 101
+
+11:08.270 --> 11:14.430
+and instead of user will have grades here and down below if I save this what do we get.
+
+11:14.430 --> 11:16.000
+We get an array with two objects.
+
+11:16.020 --> 11:19.970
+As expected we have all of the grades for Andrew 86 and 80.
+
+11:20.010 --> 11:22.480
+I'm going to go ahead and pass in nine nine nine.
+
+11:22.530 --> 11:23.890
+We get Jessica's grades.
+
+11:24.000 --> 11:31.350
+And finally 12 that house and 12 we get an empty array which is exactly what I was hoping for.
+
+11:31.350 --> 11:31.700
+All right.
+
+11:31.710 --> 11:36.710
+Just one more function left then we'll be done with this video and we can move on to the next one.
+
+11:36.990 --> 11:43.440
+So in the end of the day this one is going to be called Konst get status and get status is going to
+
+11:43.440 --> 11:44.250
+be a function.
+
+11:44.400 --> 11:53.200
+And it is going to take the user id so the ID for the user whose status is trying to fetch.
+
+11:53.220 --> 11:57.250
+Now the goal of this one is to just return a string along these lines.
+
+11:57.300 --> 12:01.080
+Well start off with their name like Andrew and then we'll add a little bit of information.
+
+12:01.080 --> 12:03.640
+Andrew has a.
+
+12:03.990 --> 12:08.870
+In this case I have an 83 average in that class so I take 80.
+
+12:09.000 --> 12:13.560
+I add on 86 I divide it by two to generate that address excuse me that average.
+
+12:13.560 --> 12:15.470
+So this is the goal.
+
+12:15.510 --> 12:23.310
+We want to resolve this string from get status after we actually run through get user and get grades.
+
+12:23.310 --> 12:26.700
+So we're going to go ahead and knock this out real quick then we'll be done.
+
+12:26.700 --> 12:31.480
+That means we'll be calling get status with a user ID.
+
+12:31.800 --> 12:37.760
+We're going to get the status back and we are going to log the status out now to kick things off.
+
+12:37.770 --> 12:38.780
+What do we need to do.
+
+12:38.940 --> 12:44.280
+Well first up we have to go ahead and return to keep that promise chain alive because right here we
+
+12:44.280 --> 12:47.130
+attach then and catch callbacks.
+
+12:47.130 --> 12:52.740
+Next up we'll be calling get user before we can actually use get grades we have to take the user id
+
+12:52.950 --> 12:55.480
+find the user object and get their school ID.
+
+12:55.620 --> 12:59.070
+And we also want to make sure we have access to the name for the message.
+
+12:59.070 --> 13:07.740
+So we need two pieces of information off of that object get user user ID will that are then call back
+
+13:10.620 --> 13:11.150
+right here.
+
+13:11.160 --> 13:13.480
+We're going to get access to that user object.
+
+13:13.560 --> 13:15.390
+And this contains some useful information.
+
+13:15.390 --> 13:21.110
+One of those pieces of information is going to allow us to actually call get grades going to return
+
+13:21.120 --> 13:29.570
+get grades right here and we're going to pass in the students school I.D. That's user dot school I.
+
+13:29.640 --> 13:30.210
+D.
+
+13:30.390 --> 13:31.260
+Perfect.
+
+13:31.260 --> 13:37.560
+So now that we have get grades called will have access to those grades down below the success callback
+
+13:37.590 --> 13:45.990
+for this promise right here we'll get the grades array we can then go ahead and actually create an average
+
+13:45.990 --> 13:50.980
+variable which we'll do in a second and then we can return our string.
+
+13:51.180 --> 13:56.490
+So that is the goal for this function but this is where we run into one of the first problems you most
+
+13:56.490 --> 13:59.680
+likely have seen when working with promises.
+
+13:59.730 --> 14:01.260
+We have this promise chain.
+
+14:01.350 --> 14:05.790
+We have to have one promise called in order to actually start the other one.
+
+14:05.910 --> 14:08.690
+And in the end of the day I want to do something with values from both.
+
+14:08.700 --> 14:13.620
+Well we can't we do not have access to user inside of this function.
+
+14:13.620 --> 14:17.930
+It was created in another function right here which is a pretty common problem.
+
+14:18.030 --> 14:22.110
+We might have run into the same problem in our weather example we're back in the beginning if we structured
+
+14:22.110 --> 14:23.320
+things a little differently.
+
+14:23.460 --> 14:28.590
+We took an address and we got a latitude and longitude we took it a lot and long and that let us get
+
+14:28.590 --> 14:29.580
+the weather.
+
+14:29.580 --> 14:31.290
+We had two strings instead of one.
+
+14:31.290 --> 14:36.800
+If I wanted one string we would have had the exact same problem we're running into here.
+
+14:37.020 --> 14:38.160
+So how do we solve this.
+
+14:38.160 --> 14:39.960
+Well there are a few ways we could do that.
+
+14:40.110 --> 14:43.030
+And most of them are kind of ugly workarounds right here.
+
+14:43.050 --> 14:50.250
+I could make a variable called user and I would set an equal to undefined at first then down below I
+
+14:50.250 --> 14:53.400
+would give it a value right here when this function runs.
+
+14:53.400 --> 14:55.580
+Now I can have two variables with the same thing.
+
+14:55.680 --> 15:03.190
+If I try to type user equals user We're going to run into some problems.
+
+15:03.270 --> 15:07.500
+It is going to take this user value and set it equal to this user value.
+
+15:07.600 --> 15:08.980
+It's not going to use this at all.
+
+15:08.980 --> 15:13.510
+So you have to add another little work around temp user.
+
+15:13.760 --> 15:18.850
+Then we're going to go ahead and set user equal to temp user.
+
+15:19.030 --> 15:25.870
+And this is going to technically work when I have access to user down here and we can get some stuff
+
+15:25.930 --> 15:26.840
+done right here.
+
+15:26.860 --> 15:30.820
+We can calculate the average of our average equals zero.
+
+15:30.820 --> 15:32.580
+Now we've been using cons throughout the course.
+
+15:32.590 --> 15:39.040
+We can actually switch our vars over to let's let is the yes six equivalent to var.
+
+15:39.130 --> 15:42.970
+So this is a variable whose value we can change.
+
+15:42.970 --> 15:48.940
+Now we're going to start off with an average of 0 and we're going to move on to actually calculating
+
+15:49.180 --> 15:55.870
+a better average if there are grades grades dot length if grades length is greater than zero.
+
+15:55.870 --> 15:56.290
+Great.
+
+15:56.300 --> 15:59.490
+We're going to go ahead and actually run a calculation now.
+
+15:59.530 --> 16:01.540
+We're going to use a few array methods here.
+
+16:01.540 --> 16:08.350
+First up we're going to set average equal to some value and we're going to kick things off by taking
+
+16:08.350 --> 16:13.160
+our array of objects and getting it down to an array of numbers and we'll do that using math.
+
+16:13.180 --> 16:16.710
+That's grades dot math here.
+
+16:16.730 --> 16:22.460
+We're going to go ahead and get access to the individual grade and we're going to do is implicitly return
+
+16:22.790 --> 16:25.280
+grade dot grade.
+
+16:25.280 --> 16:30.920
+So we have the individual grade object and we're trying to access it's grade property.
+
+16:30.920 --> 16:36.350
+At this point we have an array of numbers we need to turn those numbers into a sum and then we have
+
+16:36.350 --> 16:38.740
+to divide that by the length of the array.
+
+16:38.900 --> 16:41.080
+And we'll be using reduce on here.
+
+16:41.240 --> 16:44.750
+So we're calling reduce on an array of numbers.
+
+16:44.750 --> 16:49.100
+Reduce works a little differently than some of the other array methods you might have seen in the past.
+
+16:49.100 --> 16:52.290
+This one takes two arguments a and b.
+
+16:52.520 --> 16:57.080
+So the first time it goes through it's going to take the first two grades and we'll be able to do something
+
+16:57.080 --> 16:58.100
+with those grades.
+
+16:58.100 --> 16:59.040
+What we want to do.
+
+16:59.330 --> 17:05.440
+We want to return a plus b and then it's going to take that some for the first two grades.
+
+17:05.450 --> 17:11.140
+It is going to call the reduce function again putting that some here and putting the third grade here.
+
+17:11.180 --> 17:17.060
+So we'll take a plus b to get that value added onto the new B and then we'll continue to generate that
+
+17:17.060 --> 17:17.720
+sum.
+
+17:17.720 --> 17:22.590
+Now we can actually simplify that a plus b.
+
+17:22.600 --> 17:25.350
+Now this alone just gives us the sun.
+
+17:25.450 --> 17:30.700
+So in the case of Andrew we haven't calculated the average 83 We've just added up the 2 numbers.
+
+17:30.700 --> 17:35.280
+We also want to divide this by grades dot length.
+
+17:35.350 --> 17:40.480
+That is what's going to give us the average and we can go ahead and test this out by printing the average
+
+17:40.480 --> 17:44.320
+variable Council dot log average.
+
+17:44.320 --> 17:46.450
+I'm going to save it right here.
+
+17:46.460 --> 17:52.250
+We have get status and we have get status for one that is perfectly fine.
+
+17:52.330 --> 17:55.110
+We can continue to use that right here.
+
+17:55.150 --> 17:57.880
+We're getting 83 printing which is the correct average.
+
+17:57.880 --> 18:02.570
+If I go ahead and rerun it for user to 100 printing everything is working real well.
+
+18:02.650 --> 18:05.510
+Undefine is just coming up because we don't have anything returned.
+
+18:05.560 --> 18:08.640
+So status equals undefined which prints right here.
+
+18:08.830 --> 18:13.630
+So instead of just dumping average to the screen let's go ahead and actually return our template shrink.
+
+18:13.630 --> 18:17.050
+This is the final thing we're going to do in this video right here.
+
+18:17.050 --> 18:21.950
+We're going to follow this format starting off with the name that is user datt name.
+
+18:22.060 --> 18:28.620
+Then we're going to move on to the next part has a followed by their grade.
+
+18:28.620 --> 18:36.050
+That's the average will toss the percent sign after it in the class period.
+
+18:36.070 --> 18:40.810
+Now that we're returning something this value will be accessible to ever calls get status.
+
+18:40.810 --> 18:45.760
+In this case that happens right here right here we see Jessica as 100 percent in the class printing
+
+18:45.760 --> 18:46.630
+to the screen.
+
+18:46.780 --> 18:53.850
+If I go on to one we see and your has an 83 and if I type in some other I.D. We can see unable to find
+
+18:53.850 --> 18:56.790
+a user with the idea of 1 to 3 printing.
+
+18:56.800 --> 19:00.350
+So this is it for our contrived starter example.
+
+19:00.400 --> 19:05.200
+I know there wasn't a heck of a lot of interesting stuff here but I promise having an example to work
+
+19:05.200 --> 19:07.960
+with is going to make understanding a single way.
+
+19:07.990 --> 19:09.930
+So so much easier.
+
+19:09.970 --> 19:15.880
+So the goal in the next video is to take this and get it down to about three lines of code using this
+
+19:15.880 --> 19:17.070
+new syntax.
+
+19:17.070 --> 19:22.390
+It's going to be three lines of code that are a whole lot easier to read and work with.
+
+19:22.390 --> 19:27.880
+It's going to look like a synchronous code as opposed to callbacks and promise chains.
+
+19:27.910 --> 19:30.190
+I am super excited to get to it.
+
+19:30.220 --> 19:32.720
+We're going to start that in the next video.
+
+19:32.800 --> 19:33.670
+I'll see you then.
